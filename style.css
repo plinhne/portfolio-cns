@@ -1,53 +1,50 @@
 /* Reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Light mode mặc định */
+/* Font Pacifico */
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(to right, #f9f9f9, #e9f5ec);
-  color: #333;
+  font-family: 'Pacifico', cursive;
+  background: linear-gradient(to right, #ffe6f0, #fff0f6);
+  color: #444;
   line-height: 1.6;
   transition: background 0.5s, color 0.5s;
 }
 
 /* Dark mode */
 body.dark-mode {
-  background: #121212;
+  background: #2a2a2a;
   color: #f1f1f1;
 }
 
 /* Header */
 header {
-  background: linear-gradient(135deg, #4CAF50, #2e7d32);
+  background: linear-gradient(135deg, #ff99cc, #ff66b2);
   color: white;
   padding: 40px 20px;
   text-align: center;
-  transition: background 0.5s;
+  border-bottom: 5px dashed #fff;
 }
 body.dark-mode header {
-  background: linear-gradient(135deg, #1b5e20, #0d3d17);
+  background: linear-gradient(135deg, #b30059, #660033);
 }
 
 /* Navigation */
 nav {
-  background: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background: #ffe6f0;
   text-align: center;
   padding: 15px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  border-bottom: 2px solid #ff99cc;
 }
 body.dark-mode nav { background: #1e1e1e; }
 nav a {
   margin: 0 20px;
   text-decoration: none;
-  color: #4CAF50;
+  color: #ff3399;
   font-weight: bold;
-  transition: color 0.3s, border-bottom 0.3s;
+  transition: color 0.3s;
 }
-nav a:hover { color: #2e7d32; border-bottom: 2px solid #2e7d32; }
-body.dark-mode nav a { color: #81c784; }
+nav a:hover { color: #cc0066; }
+body.dark-mode nav a { color: #ff99cc; }
 
 /* Section */
 section {
@@ -56,36 +53,36 @@ section {
   margin: auto;
 }
 section h2 {
-  color: #2e7d32;
+  color: #ff3399;
   margin-bottom: 20px;
   font-size: 2em;
-  border-left: 5px solid #4CAF50;
+  border-left: 5px solid #ff99cc;
   padding-left: 10px;
 }
-body.dark-mode section h2 { color: #81c784; }
+body.dark-mode section h2 { color: #ff99cc; }
 
 /* Project cards */
 .project {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  background: #fff0f6;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(255,105,180,0.3);
   padding: 25px;
   margin-bottom: 25px;
-  transition: transform 0.3s, box-shadow 0.3s, background 0.5s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.project:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
-body.dark-mode .project { background: #1e1e1e; box-shadow: 0 4px 15px rgba(255,255,255,0.1); }
+.project:hover { transform: scale(1.03); box-shadow: 0 6px 20px rgba(255,20,147,0.4); }
+body.dark-mode .project { background: #333; box-shadow: 0 4px 15px rgba(255,255,255,0.1); }
 
 /* Footer */
 footer {
   text-align: center;
   padding: 20px;
-  background: #333;
+  background: #ff99cc;
   color: white;
   font-size: 0.9em;
-  transition: background 0.5s;
+  border-top: 5px dashed #fff;
 }
-body.dark-mode footer { background: #000; }
+body.dark-mode footer { background: #660033; }
 
 /* Dark Mode Button */
 .dark-toggle {
@@ -94,46 +91,9 @@ body.dark-mode footer { background: #000; }
   right: 20px;
   padding: 10px 15px;
   border: none;
-  border-radius: 5px;
-  background: #4CAF50;
+  border-radius: 20px;
+  background: #ff66b2;
   color: white;
   cursor: pointer;
-  transition: background 0.3s;
-}
-.dark-toggle:hover { background: #2e7d32; }
-/* Container cho hiệu ứng */
-.falling-petals {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* không ảnh hưởng đến thao tác người dùng */
-  overflow: hidden;
-  z-index: 999;
-}
-
-/* Cánh hoa */
-.petal {
-  position: absolute;
-  top: -10%;
-  width: 20px;
-  height: 20px;
-  background: pink;
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: fall linear infinite;
-}
-
-/* Animation rơi */
-@keyframes fall {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
+  font-weight: bold;
+  box-shadow: 0 
