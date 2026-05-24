@@ -1,5 +1,5 @@
 // ==========================================================================
-// 1. LOGIC VẬN HÀNH MÀN HÌNH CHỜ WINDOWS XP & KÍCH HOẠT PHÁO HOA
+// 1. LOGIC WINDOWS XP, PHÁO HOA & MỞ KHÓA PORTFOLIO
 // ==========================================================================
 
 const desktop = document.getElementById('desktop');
@@ -7,7 +7,7 @@ const contextMenu = document.getElementById('context-menu');
 const xpScreen = document.getElementById('xp-screen');
 const portfolioScreen = document.getElementById('portfolio-screen');
 
-// Hiển thị menu chuột phải trên màn hình Desktop Windows XP
+// Hiển thị menu chuột phải tùy chỉnh trên Desktop Windows XP
 if (desktop) {
     desktop.addEventListener('contextmenu', function(e) {
         e.preventDefault();
@@ -21,14 +21,16 @@ if (desktop) {
     });
 }
 
-// Ẩn menu chuột phải khi nhấp chuột trái ra ngoài
+// Ẩn menu chuột phải khi nhấp chuột trái ra vùng trống
 document.addEventListener('click', function() {
     if (contextMenu) contextMenu.style.display = 'none';
 });
 
-// Hàm tạo thư mục mới -> Kích hoạt pháo hoa chúc mừng -> Mở khóa Portfolio
+// Hàm tạo thư mục mới -> Bắn pháo hoa -> Kích hoạt hiển thị Portfolio
 function createNewFolder() {
-    // 1. Tạo biểu tượng Thư mục mới trên màn hình XP
+    if (!desktop) return;
+
+    // 1. Sinh cấu trúc biểu tượng Folder mới
     const newFolder = document.createElement('div');
     newFolder.className = 'icon';
     newFolder.innerHTML = `
@@ -38,14 +40,13 @@ function createNewFolder() {
     desktop.appendChild(newFolder);
     contextMenu.style.display = 'none';
 
-    // 2. Bắn pháo hoa đa sắc màu liên tục trong 2.5 giây sử dụng thư viện canvas-confetti
+    // 2. Chạy hiệu ứng pháo hoa rực rỡ trong 2.5 giây sử dụng thư viện canvas-confetti
     let duration = 2.5 * 1000;
     let end = Date.now() + duration;
 
     (function frame() {
-        // Chùm pháo bên trái bắn chéo lên phải
+        // Bắn pháo hoa liên tục từ góc trái và phải màn hình
         confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0, y: 0.85 } });
-        // Chùm pháo bên phải bắn chéo lên trái
         confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1, y: 0.85 } });
 
         if (Date.now() < end) {
@@ -53,23 +54,25 @@ function createNewFolder() {
         }
     }());
 
-    // 3. Làm mờ giao diện XP và hiển thị trang Portfolio cá nhân một cách mượt mà
+    // 3. Thực hiện hiệu ứng chuyển trang: Ẩn màn hình XP, Hiện Portfolio
     setTimeout(() => {
-        xpScreen.style.opacity = '0';
-        xpScreen.style.visibility = 'hidden';
-        
-        portfolioScreen.style.visibility = 'visible';
-        portfolioScreen.style.opacity = '1';
-        
-        // Trả lại thanh cuộn dọc (scroll) bình thường cho trình duyệt
-        document.body.style.overflow = 'auto'; 
-        
-        // Kích hoạt ngay lập tức hàm kiểm tra cuộn trang để hiển thị các phần tử đầu tiên
-        handleScrollReveal();
+        if (xpScreen && portfolioScreen) {
+            xpScreen.style.opacity = '0';
+            xpScreen.style.visibility = 'hidden';
+            
+            portfolioScreen.style.visibility = 'visible';
+            portfolioScreen.style.opacity = '1';
+            
+            // Mở lại thanh cuộn dọc của trình duyệt sau khi vào Portfolio
+            document.body.style.overflow = 'auto'; 
+            
+            // Chạy ngay hiệu ứng kiểm tra Scroll Reveal cho các phần tử đầu tiên
+            handleScrollReveal();
+        }
     }, 2500);
 }
 
-// Cập nhật thời gian thực cho đồng hồ ở góc phải Taskbar XP
+// Logic đồng hồ ở khay hệ thống Taskbar Windows XP
 function updateClock() {
     const clockElement = document.getElementById('clock');
     if (!clockElement) return;
@@ -79,7 +82,7 @@ function updateClock() {
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
     
-    hours = hours % 12 || 12; // Chuyển định dạng 24h sang 12h
+    hours = hours % 12 || 12;
     clockElement.textContent = `${hours}:${minutes} ${ampm}`;
 }
 setInterval(updateClock, 1000);
@@ -87,7 +90,7 @@ updateClock();
 
 
 // ==========================================================================
-// 2. LOGIC NÚT ĐỔI CHẾ ĐỘ TỐI (DARK MODE) CHO PORTFOLIO
+// 2. LOGIC NÚT ĐỔI CHẾ ĐỘ TỐI (DARK MODE) CỦA PORTFOLIO
 // ==========================================================================
 
 const toggleDarkBtn = document.getElementById('toggle-dark');
@@ -96,7 +99,7 @@ if (toggleDarkBtn) {
     toggleDarkBtn.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
         
-        // Cập nhật lại biểu tượng hiển thị trên nút bấm tương ứng với trạng thái
+        // Hoán đổi chữ hiển thị tương ứng trạng thái
         if (document.body.classList.contains('dark-mode')) {
             toggleDarkBtn.textContent = '☀️ Light Mode';
         } else {
@@ -107,25 +110,24 @@ if (toggleDarkBtn) {
 
 
 // ==========================================================================
-// 3. HIỆU ỨNG TRƯỢT LÊN NỐI ĐUÔI NHAU KHI CUỘN CHUỘT (SCROLL REVEAL)
+// 3. HIỆU ỨNG TRƯỢT NỐI ĐUÔI KHI CUỘN CHUỘT (SCROLL REVEAL)
 // ==========================================================================
 
 const revealElements = document.querySelectorAll('.reveal-on-scroll');
 
 function handleScrollReveal() {
-    // Vòng lặp kiểm tra từng phần tử có class .reveal-on-scroll
     revealElements.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
         
-        // Nếu phần tử xuất hiện trong khung nhìn cách cạnh dưới màn hình 100px
+        // Kiểm tra xem thẻ ứng dụng đã lọt vào tầm nhìn của người xem chưa
         if (elementTop < windowHeight - 100) {
             element.classList.add('active');
         } else {
-            element.classList.remove('active'); // Ẩn lại nếu cuộn ngược lên trên
+            element.classList.remove('active');
         }
     });
 }
 
-// Lắng nghe sự kiện cuộn trang để kích hoạt hiệu ứng trượt của các Project
+// Gắn sự kiện cuộn trang
 window.addEventListener('scroll', handleScrollReveal);
