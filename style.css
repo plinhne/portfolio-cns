@@ -81,27 +81,97 @@ body.dark-mode {
 }
 
 /* Menu chuột phải */
+/* Giao diện chính của Menu chuột phải */
 #context-menu {
   display: none;
   position: absolute;
-  background: #fff;
+  background: #f0f0f0; /* Màu nền xám nhạt của Windows */
   border: 1px solid #716f64;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   z-index: 10001;
   padding: 2px;
-  min-width: 150px;
+  min-width: 180px;
   font-family: Tahoma, Arial, sans-serif;
+  font-size: 11px;
 }
 
+/* Các hàng trong menu */
 .menu-item {
-  padding: 5px 20px 5px 25px;
-  cursor: pointer;
+  padding: 4px 15px 4px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
   color: #000;
+  cursor: default;
 }
 
-.menu-item:hover {
+/* Vạch kẻ ngang phân chia các vùng ứng dụng */
+.menu-separator {
+  border: none;
+  border-top: 1px solid #aca899;
+  margin: 3px 2px;
+}
+
+/* HIỆU ỨNG KHÓA: Làm mờ và chặn click các mục không dùng */
+.menu-item.disabled, .submenu-item.disabled {
+  opacity: 0.4;             /* Làm mờ chữ */
+  pointer-events: none;     /* Khóa hoàn toàn, không thể click */
+  background: transparent !important;
+  color: #555 !important;
+}
+
+/* Mũi tên nhỏ bên cạnh chữ New */
+.submenu-arrow {
+  font-size: 8px;
+}
+
+/* Kích hoạt hiệu ứng hover cho mục New hợp lệ */
+.menu-item.has-submenu:hover {
   background: #316ac5;
   color: #fff;
+}
+
+/* ==========================================
+   CẤU HÌNH MENU CON (SUBMENU)
+   ========================================== */
+.submenu {
+  display: none; /* Ẩn menu con lúc đầu */
+  position: absolute;
+  top: -3px;
+  left: 98%; /* Hiển thị tràn sang bên phải menu cha */
+  background: #f0f0f0;
+  border: 1px solid #716f64;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  padding: 2px;
+  min-width: 180px;
+}
+
+/* Khi di chuột vào mục New -> Tự động hiện menu con */
+.menu-item.has-submenu:hover .submenu {
+  display: block;
+}
+
+/* Các hàng bên trong menu con */
+.submenu-item {
+  padding: 4px 10px 4px 6px;
+  display: flex;
+  align-items: center;
+  color: #000;
+  gap: 5px;
+}
+
+/* Khi di chuột vào chữ Folder */
+.submenu-item:not(.disabled):hover {
+  background: #316ac5;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Icon nhỏ đi kèm trước chữ Folder */
+.menu-icon {
+  width: 16px;
+  height: 16px;
 }
 
 /* Thư mục Folder trên màn hình XP */
