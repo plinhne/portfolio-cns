@@ -1,3 +1,164 @@
+/* ==========================================================================
+   1. GIAO DIỆN MÀN HÌNH CHỜ WINDOWS XP (BỔ SUNG)
+   ========================================================================== */
+   
+/* Khóa cuộn trang khi đang ở màn hình XP */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; 
+}
+
+#xp-screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999; /* Luôn nằm trên cùng */
+  transition: opacity 1s ease-out, visibility 1s;
+  user-select: none;
+}
+
+#desktop {
+  width: 100%;
+  height: calc(100% - 30px);
+  background: #245edb url('https://wikimedia.org') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 20px;
+}
+
+/* Hộp nhiệm vụ hướng dẫn người xem */
+#mission-box {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fffbf0;
+  border: 2px solid #004ece;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+  font-size: 13px;
+  font-weight: bold;
+  color: #004ece;
+  text-align: center;
+  z-index: 10000;
+  animation: xpBounce 2s infinite;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+@keyframes xpBounce {
+  0%, 100% { top: 20px; }
+  50% { top: 30px; }
+}
+
+/* Menu chuột phải */
+#context-menu {
+  display: none;
+  position: absolute;
+  background: #fff;
+  border: 1px solid #716f64;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  z-index: 10001;
+  padding: 2px;
+  min-width: 150px;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+.menu-item {
+  padding: 5px 20px 5px 25px;
+  cursor: pointer;
+  color: #000;
+}
+
+.menu-item:hover {
+  background: #316ac5;
+  color: #fff;
+}
+
+/* Thư mục Folder trên màn hình XP */
+.icon {
+  width: 85px;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.9);
+  font-weight: bold;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+.icon img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+}
+
+/* Thanh tác vụ bên dưới */
+#taskbar {
+  width: 100%;
+  height: 30px;
+  background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #1b4fa3 92%, #19448a 100%);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#start-button {
+  height: 100%;
+  padding: 0 15px;
+  background: linear-gradient(to bottom, #60af37 0%, #539e2e 9%, #438522 18%, #326417 92%, #264e10 100%);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+#system-tray {
+  height: 100%;
+  background: linear-gradient(to bottom, #0c8df2 0%, #0066cc 100%);
+  border-left: 1px solid #10418c;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+/* Ẩn Portfolio lúc đầu, chỉ hiện sau khi hoàn thành game */
+#portfolio-screen {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.5s ease-in;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* ==========================================================================
+   2. STYLE GIAO DIỆN PORTFOLIO CỦA BẠN (GIỮ NGUYÊN GỐC)
+   ========================================================================== */
+
 /* Reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -68,10 +229,8 @@ body.dark-mode section h2 { color: #ff99cc; }
   box-shadow: 0 4px 15px rgba(255,105,180,0.3);
   padding: 25px;
   margin-bottom: 25px;
-  /* Kết hợp transition của cả hiệu ứng cũ và hiệu ứng trượt mới */
   transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s ease-out;
 }
-/* Hiệu ứng di chuột (Chỉ kích hoạt khi thẻ đã hiển thị xong trên màn hình) */
 .project.active:hover { 
   transform: scale(1.03) translateY(0); 
   box-shadow: 0 6px 20px rgba(255,20,147,0.4); 
@@ -102,14 +261,12 @@ body.dark-mode footer { background: #660033; }
   cursor: pointer;
   font-weight: bold;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  z-index: 1000; /* Luôn nổi trên các phần tử khác khi cuộn trang */
+  z-index: 1000;
 }
 
 /* ==========================================
    CẤU HÌNH HIỆU ỨNG SCROLL REVEAL
    ========================================== */
-
-/* Trạng thái ẩn ban đầu */
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(35px);
@@ -117,7 +274,6 @@ body.dark-mode footer { background: #660033; }
   will-change: opacity, transform;
 }
 
-/* Trạng thái hiển thị khi cuộn chuột tới */
 .reveal-on-scroll.active {
   opacity: 1;
   transform: translateY(0);
