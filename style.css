@@ -1,23 +1,42 @@
 /* ==========================================================================
-   1. GIAO DIỆN MÀN HÌNH CHỜ WINDOWS XP (BỔ SUNG)
+   1. RESET HỆ THỐNG & CẤU HÌNH THÂN TRANG
    ========================================================================== */
-   
-/* Khóa cuộn trang khi đang ở màn hình XP */
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; 
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
 }
 
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Tahoma', cursive;
+  background: linear-gradient(to right, #ffe6f0, #fff0f6);
+  color: #444;
+  line-height: 1.6;
+  transition: background 0.5s, color 0.5s;
+  overflow: hidden; /* Khóa cuộn trang khi đang ở màn hình XP */
+}
+
+/* Dark mode */
+body.dark-mode {
+  background: #2a2a2a;
+  color: #f1f1f1;
+}
+
+/* ==========================================================================
+   2. GIAO DIỆN MÀN HÌNH CHỜ WINDOWS XP
+   ========================================================================== */
 #xp-screen {
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999; /* Luôn nằm trên cùng */
+  z-index: 9999; /* Đảm bảo che phủ hoàn toàn Portfolio lúc đầu */
   transition: opacity 1s ease-out, visibility 1s;
   user-select: none;
 }
@@ -145,7 +164,7 @@ body {
   font-family: Tahoma, Arial, sans-serif;
 }
 
-/* Ẩn Portfolio lúc đầu, chỉ hiện sau khi hoàn thành game */
+/* Ẩn hoàn toàn Portfolio lúc ban đầu */
 #portfolio-screen {
   opacity: 0;
   visibility: hidden;
@@ -154,28 +173,9 @@ body {
   height: 100%;
 }
 
-
 /* ==========================================================================
-   2. STYLE GIAO DIỆN PORTFOLIO CỦA BẠN (GIỮ NGUYÊN GỐC)
+   3. STYLE GIAO DIỆN PORTFOLIO CỦA BẠN
    ========================================================================== */
-
-/* Reset */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-/* Thân trang */
-body {
-  font-family: 'Tahoma', cursive;
-  background: linear-gradient(to right, #ffe6f0, #fff0f6);
-  color: #444;
-  line-height: 1.6;
-  transition: background 0.5s, color 0.5s;
-}
-
-/* Dark mode */
-body.dark-mode {
-  background: #2a2a2a;
-  color: #f1f1f1;
-}
 
 /* Header */
 header {
@@ -231,6 +231,7 @@ body.dark-mode section h2 { color: #ff99cc; }
   margin-bottom: 25px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s ease-out;
 }
+/* Hiệu ứng di chuột khi thẻ dự án đã kích hoạt hiển thị */
 .project.active:hover { 
   transform: scale(1.03) translateY(0); 
   box-shadow: 0 6px 20px rgba(255,20,147,0.4); 
