@@ -1,219 +1,118 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Cá Nhân - Lê Phương Linh</title>
-    <!-- Thư viện tạo hiệu ứng pháo hoa -->
-    <script src="https://jsdelivr.net"></script>
-    <style>
-        /* ==========================================================================
-           1. CSS GIAO DIỆN WINDOWS XP (BẮT BUỘC ĐỂ CHẠY TRÒ CHƠI)
-           ========================================================================== */
-        * { box-sizing: border-box; user-select: none; }
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: Tahoma, Arial, sans-serif; font-size: 12px; overflow: hidden; background-color: #ffffff; }
-        
-        #xp-screen {
-            width: 100%;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 100;
-            transition: opacity 1s ease-out, visibility 1s;
-        }
-        #desktop {
-            width: 100%;
-            height: calc(100% - 30px);
-            background: #245edb url('https://wikimedia.org') no-repeat center center;
-            background-size: cover;
-            position: relative;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            align-content: flex-start;
-            gap: 20px;
-        }
-        #mission-box {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #fffbf0;
-            border: 2px solid #004ece;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
-            font-size: 14px;
-            font-weight: bold;
-            color: #004ece;
-            text-align: center;
-            z-index: 101;
-            animation: bounce 2s infinite;
-        }
-        @keyframes bounce {
-            0%, 100% { top: 20px; }
-            50% { top: 30px; }
-        }
-        #context-menu { display: none; position: absolute; background: #fff; border: 1px solid #716f64; box-shadow: 2px 2px 5px rgba(0,0,0,0.3); z-index: 1000; padding: 2px; min-width: 150px; }
-        .menu-item { padding: 5px 20px 5px 25px; cursor: pointer; }
-        .menu-item:hover { background: #316ac5; color: #fff; }
-        .icon { width: 85px; height: 75px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; color: white; text-shadow: 1px 1px 1px rgba(0,0,0,0.9); font-weight: bold; }
-        .icon img { width: 40px; height: 40px; margin-bottom: 5px; }
-        #taskbar { width: 100%; height: 30px; background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #1b4fa3 92%, #19448a 100%); position: absolute; bottom: 0; left: 0; display: flex; justify-content: space-between; align-items: center; }
-        #start-button { height: 100%; padding: 0 15px; background: linear-gradient(to bottom, #60af37 0%, #539e2e 9%, #438522 18%, #326417 92%, #264e10 100%); border-top-right-radius: 5px; border-bottom-right-radius: 5px; display: flex; align-items: center; color: white; font-size: 14px; font-weight: bold; font-style: italic; }
-        #system-tray { height: 100%; background: linear-gradient(to bottom, #0c8df2 0%, #0066cc 100%); border-left: 1px solid #10418c; padding: 0 10px; display: flex; align-items: center; color: white; }
-
-        /* ==========================================================================
-           2. CSS ĐIỀU KHIỂN HIỂN THỊ (PORTFOLIO DẠNG CƠ BẢN KHÔNG STYLE MÀU MÈ)
-           ========================================================================== */
-        #portfolio-screen {
-            display: block;
-            padding: 20px;
-            user-select: text; /* Cho phép bôi chọn văn bản bình thường */
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 1.5s ease-in;
-            font-family: sans-serif; /* Font cơ bản */
-        }
-        /* Chỉ giữ lại khoảng cách lề cơ bản, xóa bỏ toàn bộ màu sắc nền và viền hoa lá */
-        nav a {
-            margin-right: 15px;
-        }
-        .project {
-            margin: 20px 0;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed #ccc; /* Đường gạch ngăn cách cơ bản */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌸 Portfolio Cá Nhân 🌸</title>
+  <!-- Nhúng file CSS của bạn -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Thư viện bắt buộc để bắn pháo hoa -->
+  <script src="https://jsdelivr.net"></script>
+  <!-- Nhúng file JavaScript của bạn -->
+  <script src="script.js" defer></script>
 </head>
 <body>
 
-    <!-- MÀN HÌNH CHỜ WINDOWS XP -->
-    <div id="xp-screen">
-        <div id="mission-box">🖱️ Hướng dẫn: Click chuột phải vào màn hình nền và chọn "New Folder" để mở Portfolio!</div>
-        
-        <div id="desktop"></div>
+  <!-- ==========================================================================
+       PHẦN 1: MÀN HÌNH CHỜ WINDOWS XP (Bắt buộc phải có để hiển thị Win XP)
+       ========================================================================== -->
+  <div id="xp-screen">
+    <div id="mission-box">🖱️ Hướng dẫn: Click chuột phải vào màn hình nền và chọn "New Folder" để mở khóa Portfolio!</div>
+    
+    <div id="desktop"></div>
 
-        <div id="context-menu">
-            <div class="menu-item" onclick="createNewFolder()">New Folder</div>
-        </div>
-
-        <div id="taskbar">
-            <div id="start-button">start</div>
-            <div id="system-tray"><span id="clock">12:00 PM</span></div>
-        </div>
+    <div id="context-menu">
+        <div class="menu-item" onclick="createNewFolder()">New Folder</div>
     </div>
 
-
-    <!-- TRANG PORTFOLIO GIAO DIỆN CƠ BẢN (ĐÃ XÓA STYLE TRANG TRÍ) -->
-    <div id="portfolio-screen">
-        <header>
-            <h1>Portfolio Cá Nhân</h1>
-            <p>Website lưu trữ và trình bày các sản phẩm học tập</p>
-        </header>
-
-        <nav>
-            <a href="#about">Giới thiệu</a>
-            <a href="#projects">Dự án</a>
-            <a href="#summary">Tổng kết</a>
-        </nav>
-
-        <hr> <!-- Thanh kẻ ngang cơ bản của HTML -->
-
-        <section id="about">
-            <h2>Giới thiệu</h2>
-            <p><strong>Họ tên:</strong> Lê Phương Linh</p>
-            <p><strong>Khoa:</strong> Công nghệ thông tin</p>
-            <p><strong>Ngành:</strong> Hệ thống thông tin</p>
-            <p><strong>Mục tiêu học tập:</strong> Phát triển kỹ năng số và ứng dụng vào thực tế.</p>
-            <p><strong>Mục tiêu của Portfolio:</strong> Thể hiện các kỹ năng đã học và lưu trữ sản phẩm cá nhân để dễ dàng chia sẻ.</p>
-        </section>
-
-        <section id="projects">
-            <h2>Dự án</h2>
-            
-            <div class="project">
-                <h3>Bài 1 - Quản lý tệp và thư mục</h3>
-                <p>Mục tiêu: Thao tác cơ bản với tệp tin và thư mục.</p>
-                <p>Sản phẩm: <a href="baitap1.pdf">Xem file PDF</a></p>
-            </div>
-
-            <div class="project">
-                <h3>Bài 2 - Tìm kiếm & đánh giá thông tin</h3>
-                <p>Mục tiêu: Tìm kiếm học thuật bằng toán tử nâng cao và đánh giá nguồn tin.</p>
-                <p>Sản phẩm: <a href="baitap2.pdf">Xem file PDF</a></p>
-            </div>
-
-            <div class="project">
-                <h3>Bài 3 - Viết Prompt hiệu quả</h3>
-                <p>Mục tiêu: So sánh Prompt ban đầu và Prompt cải tiến cùng kết quả AI.</p>
-                <p>Sản phẩm: <a href="baitap3.pdf">Xem file PDF</a></p>
-            </div>
-
-            <div class="project">
-                <h3>Bài 4 - Hợp tác trực tuyến</h3>
-                <p>Mục tiêu: Minh chứng sử dụng công cụ quản lý dự án nhóm và phối hợp trực tuyến.</p>
-                <p>Sản phẩm: <a href="baitap4.pdf">Xem file PDF</a></p>
-            </div>
-
-            <div class="project">
-                <h3>Bài 5 - Sáng tạo nội dung với AI</h3>
-                <p>Mục tiêu: Trưng bày sản phẩm nội dung số hoàn thiện (hình ảnh, video, bài viết).</p>
-                <p>Sản phẩm: <a href="baitap5.pdf">Xem file PDF</a></p>
-            </div>
-
-            <div class="project">
-                <h3>Bài 6 - AI có trách nhiệm</h3>
-                <p>Mục tiêu: Trình bày nguyên tắc và ví dụ sử dụng AI có trách nhiệm.</p>
-                <p>Sản phẩm: <a href="baitap6.pdf">Xem file PDF</a></p>
-            </div>
-        </section>
-
-        <section id="summary">
-            <h2>Tổng kết</h2>
-            <p>Qua quá trình thực hiện Portfolio, mình đã rèn luyện được kỹ năng quản lý dữ liệu, tìm kiếm thông tin, viết Prompt hiệu quả, hợp tác trực tuyến, sáng tạo nội dung với AI và đặc biệt là sử dụng AI có trách nhiệm.</p>
-            <p>Điều mình tâm đắc nhất là khả năng kết hợp kiến thức công nghệ với sự sáng tạo để tạo ra sản phẩm hữu ích. Thách thức lớn nhất là duy trì tính liêm chính học thuật và đảm bảo mọi nội dung đều phản ánh đúng năng lực bản thân.</p>
-            <p>Portfolio này không chỉ là minh chứng cho quá trình học tập mà còn là bước đệm để mình phát triển sự nghiệp trong lĩnh vực công nghệ số.</p>
-        </section>
-
-        <hr>
-
-        <footer>
-            <p>&copy; 2026 Lê Phương Linh. All rights reserved.</p>
-        </footer>
+    <div id="taskbar">
+        <div id="start-button">start</div>
+        <div id="system-tray"><span id="clock">12:00 PM</span></div>
     </div>
+  </div>
 
 
-    <!-- JAVASCRIPT ĐIỀU KHIỂN CHUYỂN TRANG VÀ PHÁO HOA -->
-    <script>
-        const desktop = document.getElementById('desktop');
-        const contextMenu = document.getElementById('context-menu');
-        const xpScreen = document.getElementById('xp-screen');
-        const portfolioScreen = document.getElementById('portfolio-screen');
+  <!-- ==========================================================================
+       PHẦN 2: TOÀN BỘ NỘI DUNG PORTFOLIO CỦA BẠN (Được bọc trong thẻ #portfolio-screen)
+       ========================================================================== -->
+  <div id="portfolio-screen">
+    <header>
+      <h1>🌸 Portfolio Cá Nhân 🌸</h1>
+      <p>Website lưu trữ và trình bày các sản phẩm học tập</p>
+    </header>
 
-        // Hiện menu chuột phải trên desktop XP
-        desktop.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            if (e.target === desktop) {
-                contextMenu.style.display = 'block';
-                contextMenu.style.left = e.clientX + 'px';
-                contextMenu.style.top = e.clientY + 'px';
-            } else {
-                contextMenu.style.display = 'none';
-            }
-        });
+    <nav>
+      <a href="#about">Giới thiệu</a>
+      <a href="#projects">Dự án</a>
+      <a href="#summary">Tổng kết</a>
+    </nav>
 
-        // Ẩn menu khi bấm chuột trái ra ngoài
-        document.addEventListener('click', function() {
-            contextMenu.style.display = 'none';
-        });
+    <!-- Nút Dark Mode -->
+    <button id="toggle-dark" class="dark-toggle">🌙 Dark Mode</button>
 
-        // Hàm xử lý: Tạo folder -> Bắn pháo hoa -> Hiện portfolio cơ bản
-        function createNewFolder() {
-            const newFolder = document.createElement('div');
-            newFolder.className = 'icon';
-            newFolder.innerHTML = `
-                <img src="https://wikimedia.org" alt="Folder">
-                <span>New Folder</span>
+    <!-- Trang Giới thiệu -->
+    <section id="about" class="reveal-on-scroll">
+      <h2>Giới thiệu</h2>
+      <p><strong>Họ tên:</strong> Lê Phương Linh</p>
+      <p><strong>Khoa:</strong> Công nghệ thông tin</p>
+      <p><strong>Ngành:</strong> Hệ thống thông tin</p>
+      <p><strong>Mục tiêu học tập:</strong> Phát triển kỹ năng số và ứng dụng vào thực tế.</p>
+      <p><strong>Mục tiêu của Portfolio:</strong> Thể hiện các kỹ năng đã học và lưu trữ sản phẩm cá nhân để dễ dàng chia sẻ.</p>
+    </section>
+
+    <!-- Trang Dự án -->
+    <section id="projects" class="reveal-on-scroll">
+      <h2>Dự án</h2>
+
+      <div class="project reveal-on-scroll">
+        <h3>🍓 Bài 1 - Quản lý tệp và thư mục</h3>
+        <p>Mục tiêu: Thao tác cơ bản với tệp tin và thư mục.</p>
+        <p>Sản phẩm: <a href="baitap1.pdf">Xem file PDF</a></p>
+      </div>
+
+      <div class="project reveal-on-scroll">
+        <h3>🍰 Bài 2 - Tìm kiếm & đánh giá thông tin</h3>
+        <p>Mục tiêu: Tìm kiếm học thuật bằng toán tử nâng cao và đánh giá nguồn tin.</p>
+        <p>Sản phẩm: <a href="baitap2.pdf">Xem file PDF</a></p>
+      </div>
+
+      <div class="project reveal-on-scroll">
+        <h3>🍭 Bài 3 - Viết Prompt hiệu quả</h3>
+        <p>Mục tiêu: So sánh Prompt ban đầu và Prompt cải tiến cùng kết quả AI.</p>
+        <p>Sản phẩm: <a href="baitap3.pdf">Xem file PDF</a></p>
+      </div>
+
+      <div class="project reveal-on-scroll">
+        <h3>🍡 Bài 4 - Hợp tác trực tuyến</h3>
+        <p>Mục tiêu: Minh chứng sử dụng công cụ quản lý dự án nhóm và phối hợp trực tuyến.</p>
+        <p>Sản phẩm: <a href="baitap4.pdf">Xem file PDF</a></p>
+      </div>
+
+      <div class="project reveal-on-scroll">
+        <h3>🍩 Bài 5 - Sáng tạo nội dung với AI</h3>
+        <p>Mục tiêu: Trưng bày sản phẩm nội dung số hoàn thiện (hình ảnh, video, bài viết).</p>
+        <p>Sản phẩm: <a href="baitap5.pdf">Xem file PDF</a></p>
+      </div>
+
+      <div class="project reveal-on-scroll">
+        <h3>🌷 Bài 6 - AI có trách nhiệm</h3>
+        <p>Mục tiêu: Trình bày nguyên tắc và ví dụ sử dụng AI có trách nhiệm.</p>
+        <p>Sản phẩm: <a href="baitap6.pdf">Xem file PDF</a></p>
+      </div>
+    </section>
+
+    <!-- Trang Tổng kết -->
+    <section id="summary" class="reveal-on-scroll">
+      <h2>Tổng kết</h2>
+      <p>🌸 Qua quá trình thực hiện Portfolio, mình đã rèn luyện được kỹ năng quản lý dữ liệu, tìm kiếm thông tin, viết Prompt hiệu quả, hợp tác trực tuyến, sáng tạo nội dung với AI và đặc biệt là sử dụng AI có trách nhiệm. 🌸</p>
+      <p>Điều mình tâm đắc nhất là khả năng kết hợp kiến thức công nghệ với sự sáng tạo để tạo ra sản phẩm hữu ích. Thách thức lớn nhất là duy trì tính liêm chính học thuật và đảm bảo mọi nội dung đều phản ánh đúng năng lực bản thân.</p>
+      <p>Portfolio này không chỉ là minh chứng cho quá trình học tập mà còn là bước đệm để mình phát triển sự nghiệp trong lĩnh vực công nghệ số.</p>
+    </section>
+
+    <footer>
+      <p>🌷 &copy; 2026 Lê Phương Linh. All rights reserved. 🌷</p>
+    </footer>
+  </div>
+
+</body>
+</html>
