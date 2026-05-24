@@ -21,9 +21,35 @@
     
     <div id="desktop"></div>
 
-    <div id="context-menu">
-        <div class="menu-item" onclick="createNewFolder()">New Folder</div>
+    <!-- Menu chuột phải cấu trúc Windows -->
+<div id="context-menu">
+    <div class="menu-item disabled">View</div>
+    <div class="menu-item disabled">Sort by</div>
+    <div class="menu-item disabled">Refresh</div>
+    <hr class="menu-separator">
+    <div class="menu-item disabled">Paste</div>
+    <div class="menu-item disabled">Paste shortcut</div>
+    <hr class="menu-separator">
+    <!-- Mục New chứa menu con bên trong -->
+    <div class="menu-item has-submenu">
+        <span>New</span>
+        <span class="submenu-arrow">►</span>
+        
+        <!-- Menu con cấp 2 -->
+        <div class="submenu">
+            <div class="submenu-item" onclick="createNewFolder()">
+                <img src="https://imgur.com" alt="Folder" class="menu-icon">
+                Folder
+            </div>
+            <div class="submenu-item disabled">Shortcut</div>
+            <hr class="menu-separator">
+            <div class="submenu-item disabled">Text Document</div>
+            <div class="submenu-item disabled">Microsoft Word Document</div>
+        </div>
     </div>
+    <hr class="menu-separator">
+    <div class="menu-item disabled">Properties</div>
+</div>
 
     <div id="taskbar">
         <div id="start-button">start</div>
