@@ -44,7 +44,7 @@ body.dark-mode {
 #desktop {
   width: 100%;
   height: calc(100% - 30px);
-  background: #245edb url('https://wikimedia.org') no-repeat center center;
+  background: #245edb url('bliss.png') no-repeat center center;
   background-size: cover;
   position: relative;
   padding: 20px;
