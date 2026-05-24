@@ -34,7 +34,7 @@ function createNewFolder() {
     const newFolder = document.createElement('div');
     newFolder.className = 'icon';
     newFolder.innerHTML = `
-        <img src="https://wikimedia.org" alt="Folder">
+        <img src="folder.png" alt="Folder">
         <span>New Folder</span>
     `;
     desktop.appendChild(newFolder);
