@@ -215,17 +215,17 @@ body.dark-mode {
 .menu-icon { width: 16px; height: 16px; }
 
 /* ==========================================================================
-   4. MÀN HÌNH TRUNG GIAN CHÚC MỪNG (THIẾT KẾ GIỚI HẠN GIỐNG ẢNH MẪU)
+   4. MÀN HÌNH TRUNG GIAN CHÚC MỪNG (CHE HOÀN TOÀN PORTFOLIO)
    ========================================================================== */
 #congrats-screen {
-  display: none; /* Ẩn ban đầu, chỉ hiện sau khi tạo thư mục */
-  position: fixed;
+  display: none;        /* Ẩn mặc định khi vừa mở trang web */
+  position: fixed;      /* Ghim cố định trên toàn bộ khung nhìn trình duyệt */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #121212; /* Màu nền tối huyền bí */
-  z-index: 9998;
+  background-color: #121212; /* Màu đen tuyền che khuất hoàn toàn Portfolio */
+  z-index: 10005;       /* Chỉ số tầng cực cao, đè lên trên cả Portfolio và Taskbar */
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -234,6 +234,7 @@ body.dark-mode {
   transition: opacity 0.8s ease-out, visibility 0.8s;
 }
 
+/* Kiểu chữ hiển thị thông điệp chúc mừng giống hệt hình ảnh mẫu */
 .congrats-text {
   font-family: 'Courier New', Courier, monospace;
   font-size: 24px;
@@ -244,7 +245,7 @@ body.dark-mode {
   word-wrap: break-word;
 }
 
-/* Nút bấm thiết kế chuẩn màu xanh giống hình ảnh mẫu */
+/* Thiết kế nút bấm màu xanh dương nổi bật */
 #view-more-btn {
   background-color: #3b82f6;
   color: white;
@@ -265,6 +266,7 @@ body.dark-mode {
   transform: translateY(-1px);
 }
 
+/* Mũi tên màu trắng xem đầy đủ portfolio */
 .white-arrow {
   font-size: 16px;
   color: #ffffff;
