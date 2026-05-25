@@ -14,42 +14,43 @@
 <body>
 
   <!-- ==========================================================================
-       PHẦN 1: MÀN HÌNH CHỜ WINDOWS XP (Bắt buộc phải có để hiển thị Win XP)
+       PHẦN 1: MÀN HÌNH CHỜ WINDOWS XP
        ========================================================================== -->
   <div id="xp-screen">
-    <div id="mission-box">🖱️ Hướng dẫn: Click chuột phải vào màn hình nền và chọn "New Folder" để mở khóa Portfolio!</div>
+    <div id="mission-box">🖱️ Hướng dẫn: Click chuột phải vào màn hình nền và chọn "New -> Folder" để mở khóa Portfolio!</div>
     
     <div id="desktop"></div>
 
     <!-- Menu chuột phải cấu trúc Windows -->
-<div id="context-menu">
-    <div class="menu-item disabled">View</div>
-    <div class="menu-item disabled">Sort by</div>
-    <div class="menu-item disabled">Refresh</div>
-    <hr class="menu-separator">
-    <div class="menu-item disabled">Paste</div>
-    <div class="menu-item disabled">Paste shortcut</div>
-    <hr class="menu-separator">
-    <!-- Mục New chứa menu con bên trong -->
-    <div class="menu-item has-submenu">
-        <span>New</span>
-        <span class="submenu-arrow">►</span>
-        
-        <!-- Menu con cấp 2 -->
-        <div class="submenu">
-            <div class="submenu-item" onclick="createNewFolder()">
-                <img src="https://imgur.com" alt="Folder" class="menu-icon">
-                Folder
+    <div id="context-menu">
+        <div class="menu-item disabled">View</div>
+        <div class="menu-item disabled">Sort by</div>
+        <div class="menu-item disabled">Refresh</div>
+        <hr class="menu-separator">
+        <div class="menu-item disabled">Paste</div>
+        <div class="menu-item disabled">Paste shortcut</div>
+        <hr class="menu-separator">
+        <!-- Mục New chứa menu con bên trong -->
+        <div class="menu-item has-submenu">
+            <span>New</span>
+            <span class="submenu-arrow">►</span>
+            
+            <!-- Menu con cấp 2 -->
+            <div class="submenu">
+                <div class="submenu-item" onclick="createNewFolder()">
+                    <!-- ĐÃ SỬA: Thay đổi đường dẫn đọc trực tiếp file folder.png nội bộ của bạn -->
+                    <img src="folder.png" alt="Folder" class="menu-icon">
+                    Folder
+                </div>
+                <div class="submenu-item disabled">Shortcut</div>
+                <hr class="menu-separator">
+                <div class="submenu-item disabled">Text Document</div>
+                <div class="submenu-item disabled">Microsoft Word Document</div>
             </div>
-            <div class="submenu-item disabled">Shortcut</div>
-            <hr class="menu-separator">
-            <div class="submenu-item disabled">Text Document</div>
-            <div class="submenu-item disabled">Microsoft Word Document</div>
         </div>
+        <hr class="menu-separator">
+        <div class="menu-item disabled">Properties</div>
     </div>
-    <hr class="menu-separator">
-    <div class="menu-item disabled">Properties</div>
-</div>
 
     <div id="taskbar">
         <div id="start-button">start</div>
@@ -59,7 +60,7 @@
 
 
   <!-- ==========================================================================
-       PHẦN 2: TOÀN BỘ NỘI DUNG PORTFOLIO CỦA BẠN (Được bọc trong thẻ #portfolio-screen)
+       PHẦN 2: TOÀN BỘ NỘI DUNG PORTFOLIO CỦA BẠN
        ========================================================================== -->
   <div id="portfolio-screen">
     <header>
