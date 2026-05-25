@@ -30,35 +30,31 @@ document.addEventListener('click', function() {
 function createNewFolder() {
     if (!desktop) return;
 
-    // 1. Tạo biểu tượng Folder (Thay link ảnh bằng link Imgur dự phòng chất lượng cao)
+    // 1. Tạo biểu tượng Folder (SỬA: Gọi trực tiếp file folder.png nội bộ có sẵn trên GitHub của bạn)
     const newFolder = document.createElement('div');
     newFolder.className = 'icon';
     newFolder.innerHTML = `
-        <img src="https://imgur.com" alt="Folder">
+        <img src="folder.png" alt="Folder">
         <span>New Folder</span>
     `;
     desktop.appendChild(newFolder);
     contextMenu.style.display = 'none';
 
-    // 2. Chạy hiệu ứng pháo hoa (Đặt trong bọc bảo vệ try-catch)
-    // Nếu mạng lỗi không tải được pháo hoa, trang web sẽ tự bỏ qua chứ không bị sập mã nguồn nữa
+    // 2. Chạy hiệu ứng pháo hoa (SỬA: Cập nhật đúng cú pháp confetti.start() cho link thư viện mới)
     try {
-        let duration = 2.5 * 1000;
-        let end = Date.now() + duration;
-
-        (function frame() {
-            confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0, y: 0.85 } });
-            confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1, y: 0.85 } });
-
-            if (Date.now() < end) {
-                requestAnimationFrame(frame);
-            }
-        }());
+        if (typeof confetti !== 'undefined' && typeof confetti.start === 'function') {
+            confetti.start(); // Bắt đầu bắn pháo hoa liên tục
+            
+            // Sau 1.8 giây tự động ngắt pháo hoa để chuyển hướng
+            setTimeout(() => {
+                confetti.stop();
+            }, 1800);
+        }
     } catch (error) {
         console.log("Không tải được hiệu ứng pháo hoa, tự động bỏ qua để chuẩn bị vào Portfolio.");
     }
 
-    // 3. Thực hiện hiệu ứng chuyển trang (Luôn luôn chạy bất kể pháo hoa có lỗi hay không)
+    // 3. Thực hiện hiệu ứng chuyển trang (Luôn luôn chạy mượt mà không lo bị kẹt lỗi)
     setTimeout(() => {
         if (xpScreen && portfolioScreen) {
             xpScreen.style.opacity = '0';
@@ -67,15 +63,15 @@ function createNewFolder() {
             portfolioScreen.style.visibility = 'visible';
             portfolioScreen.style.opacity = '1';
             
-            // Mở lại thanh cuộn dọc cho Portfolio
+            // Mở lại thanh cuộn dọc cho trang Portfolio
             document.body.style.overflow = 'auto'; 
             
-            // Kích hoạt hiệu ứng cuộn trang Portfolio
+            // Kích hoạt ngay hiệu ứng trượt cuộn các Project
             if (typeof handleScrollReveal === 'function') {
                 handleScrollReveal();
             }
         }
-    }, 2500); // Sau 2.5 giây từ lúc bấm tạo thư mục sẽ tự chuyển sang Portfolio
+    }, 2200); // Tự động đổi sang trang Portfolio sau 2.2 giây
 }
 
 // Logic đồng hồ ở khay hệ thống Taskbar Windows XP
@@ -116,7 +112,7 @@ if (toggleDarkBtn) {
 
 
 // ==========================================================================
-// 3. HIỆU ỨNG TRƯỢT NỐI ĐUÔI KHI CUỘN CHUỘT (SCROLL REVEAL)
+// 3. HIỆU ỨNG TRƯỢT NỐI ĐUÔI CỦA THẺ DỰ ÁN KHI CUỘN CHUỘT (SCROLL REVEAL)
 // ==========================================================================
 
 const revealElements = document.querySelectorAll('.reveal-on-scroll');
