@@ -1,13 +1,14 @@
 // ==========================================================================
-// 1. LOGIC WINDOWS XP, PHÁO HOA & MỞ KHÓA PORTFOLIO
+// 1. LOGIC WINDOWS XP, PHÁO HOA & ĐIỀU HƯỚNG TRUNG GIAN
 // ==========================================================================
 
 const desktop = document.getElementById('desktop');
 const contextMenu = document.getElementById('context-menu');
 const xpScreen = document.getElementById('xp-screen');
+const congratsScreen = document.getElementById('congrats-screen');
 const portfolioScreen = document.getElementById('portfolio-screen');
 
-// Hiển thị menu chuột phải tùy chỉnh trên Desktop Windows XP
+// Hiện menu chuột phải trên Desktop XP
 if (desktop) {
     desktop.addEventListener('contextmenu', function(e) {
         e.preventDefault();
@@ -21,16 +22,15 @@ if (desktop) {
     });
 }
 
-// Ẩn menu chuột phải khi nhấp chuột trái ra vùng trống
 document.addEventListener('click', function() {
     if (contextMenu) contextMenu.style.display = 'none';
 });
 
-// Hàm tạo thư mục mới -> Bắn pháo hoa -> Kích hoạt hiển thị Portfolio
+// GIAI ĐOẠN 1: Tạo thư mục mới -> Bắn pháo hoa -> Hiện màn hình chúc mừng tối màu
 function createNewFolder() {
     if (!desktop) return;
 
-    // 1. Tạo biểu tượng Folder (SỬA: Gọi trực tiếp file folder.png nội bộ có sẵn trên GitHub của bạn)
+    // Sinh Folder lớn trên Desktop
     const newFolder = document.createElement('div');
     newFolder.className = 'icon';
     newFolder.innerHTML = `
@@ -40,41 +40,54 @@ function createNewFolder() {
     desktop.appendChild(newFolder);
     contextMenu.style.display = 'none';
 
-    // 2. Chạy hiệu ứng pháo hoa (SỬA: Cập nhật đúng cú pháp confetti.start() cho link thư viện mới)
+    // Kích hoạt bắn pháo hoa liên tục
     try {
         if (typeof confetti !== 'undefined' && typeof confetti.start === 'function') {
-            confetti.start(); // Bắt đầu bắn pháo hoa liên tục
-            
-            // Sau 1.8 giây tự động ngắt pháo hoa để chuyển hướng
+            confetti.start();
             setTimeout(() => {
                 confetti.stop();
             }, 1800);
         }
     } catch (error) {
-        console.log("Không tải được hiệu ứng pháo hoa, tự động bỏ qua để chuẩn bị vào Portfolio.");
+        console.log("Lỗi thư viện pháo hoa.");
     }
 
-    // 3. Thực hiện hiệu ứng chuyển trang (Luôn luôn chạy mượt mà không lo bị kẹt lỗi)
+    // Chuyển từ màn hình Windows XP sang màn hình đen chúc mừng trung gian
     setTimeout(() => {
-        if (xpScreen && portfolioScreen) {
+        if (xpScreen && congratsScreen) {
             xpScreen.style.opacity = '0';
             xpScreen.style.visibility = 'hidden';
             
-            portfolioScreen.style.visibility = 'visible';
-            portfolioScreen.style.opacity = '1';
-            
-            // Mở lại thanh cuộn dọc cho trang Portfolio
-            document.body.style.overflow = 'auto'; 
-            
-            // Kích hoạt ngay hiệu ứng trượt cuộn các Project
-            if (typeof handleScrollReveal === 'function') {
-                handleScrollReveal();
-            }
+            congratsScreen.style.display = 'flex';
         }
-    }, 2200); // Tự động đổi sang trang Portfolio sau 2.2 giây
+    }, 2200);
 }
 
-// Logic đồng hồ ở khay hệ thống Taskbar Windows XP
+// GIAI ĐOẠN 2: Người dùng bấm nút "Xem đầy đủ portfolio" -> Chuyển cảnh reveal Portfolio
+function revealPortfolio() {
+    if (!congratsScreen || !portfolioScreen) return;
+
+    // Ẩn màn hình chúc mừng
+    congratsScreen.style.opacity = '0';
+    congratsScreen.style.visibility = 'hidden';
+    
+    // Hiển thị mượt mà trang Portfolio chính
+    setTimeout(() => {
+        congratsScreen.style.display = 'none';
+        portfolioScreen.style.visibility = 'visible';
+        portfolioScreen.style.opacity = '1';
+        
+        // Mở khóa thanh cuộn dọc cho trình duyệt để xem Portfolio
+        document.body.style.overflow = 'auto'; 
+        
+        // Kích hoạt ngay hiệu ứng trượt cuộn các Project đầu tiên
+        if (typeof handleScrollReveal === 'function') {
+            handleScrollReveal();
+        }
+    }, 800);
+}
+
+// Đồng hồ hệ thống Taskbar Win XP
 function updateClock() {
     const clockElement = document.getElementById('clock');
     if (!clockElement) return;
@@ -90,18 +103,14 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-
 // ==========================================================================
 // 2. LOGIC NÚT ĐỔI CHẾ ĐỘ TỐI (DARK MODE) CỦA PORTFOLIO
 // ==========================================================================
-
 const toggleDarkBtn = document.getElementById('toggle-dark');
 
 if (toggleDarkBtn) {
     toggleDarkBtn.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-        
-        // Hoán đổi chữ hiển thị tương ứng trạng thái
         if (document.body.classList.contains('dark-mode')) {
             toggleDarkBtn.textContent = '☀️ Light Mode';
         } else {
@@ -110,11 +119,9 @@ if (toggleDarkBtn) {
     });
 }
 
-
 // ==========================================================================
-// 3. HIỆU ỨNG TRƯỢT NỐI ĐUÔI CỦA THẺ DỰ ÁN KHI CUỘN CHUỘT (SCROLL REVEAL)
+// 3. HIỆU ỨNG TRƯỢT NỐI ĐUÔI KHI CUỘN CHUỘT (SCROLL REVEAL)
 // ==========================================================================
-
 const revealElements = document.querySelectorAll('.reveal-on-scroll');
 
 function handleScrollReveal() {
@@ -122,7 +129,6 @@ function handleScrollReveal() {
         const elementTop = element.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
         
-        // Kiểm tra xem thẻ ứng dụng đã lọt vào tầm nhìn của người xem chưa
         if (elementTop < windowHeight - 100) {
             element.classList.add('active');
         } else {
@@ -130,6 +136,4 @@ function handleScrollReveal() {
         }
     });
 }
-
-// Gắn sự kiện cuộn trang
 window.addEventListener('scroll', handleScrollReveal);
