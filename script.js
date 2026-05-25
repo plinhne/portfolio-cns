@@ -39,16 +39,15 @@ function createNewFolder() {
     contextMenu.style.display = 'none';
 
     // Kích hoạt pháo hoa liên tục từ thư viện mới
-    try {
-        if (typeof confetti !== 'undefined' && typeof confetti.start === 'function') {
-            confetti.start();
-            setTimeout(() => {
-                confetti.stop();
-            }, 1800);
-        }
-    } catch (error) {
-        console.log("Lỗi nạp thư viện confetti.");
+// Kích hoạt pháo hoa theo chuẩn cú pháp thư viện @hiseb/confetti
+try {
+    if (typeof confetti === 'function') {
+        confetti(); // Chỉ gọi một hàm duy nhất để bắn chùm pháo hoa mặc định
     }
+} catch (error) {
+    console.log("Lỗi nạp hiệu ứng pháo hoa.");
+}
+
 
     // Làm mờ Windows XP và chuyển sang chế độ hiển thị màn hình chúc mừng màu đen che phủ
     setTimeout(() => {
