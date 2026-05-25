@@ -18,33 +18,29 @@ body {
   color: #444;
   line-height: 1.6;
   transition: background 0.5s, color 0.5s;
-  overflow: hidden; /* Khóa cuộn trang khi đang ở màn hình XP */
+  overflow: hidden; 
 
-  /* CẤU HÌNH CON TRỎ CHUỘT PIXEL WINDOWS XP */
   cursor: url('cursor.png') 0 0, auto !important;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
-  image-rendering: pixelated; /* Giữ nét răng cưa cho con trỏ */
+  image-rendering: pixelated; 
 }
 
-/* Ép tất cả các khu vực hệ thống dùng chung con trỏ chuột pixel */
-#xp-screen, #context-menu, .menu-item, .submenu-item, #desktop {
+#xp-screen, #context-menu, .menu-item, .submenu-item, #desktop, #congrats-screen {
   cursor: url('cursor.png') 0 0, auto !important;
 }
 
-/* Các vùng tương tác bấm được */
-#start-button, .submenu-item:not(.disabled), .icon, nav a, button {
+#start-button, .submenu-item:not(.disabled), .icon, nav a, button, #view-more-btn {
   cursor: url('cursor.png') 0 0, pointer !important;
 }
 
-/* Dark mode */
 body.dark-mode {
   background: #2a2a2a;
   color: #f1f1f1;
 }
 
 /* ==========================================================================
-   2. GIAO DIỆN MÀN HÌNH CHỜ WINDOWS XP
+   2. GIAO DIỆN MÀN HÌNH CHỜ WINDOWS XP & LOGO START
    ========================================================================== */
 #xp-screen {
   width: 100%;
@@ -52,8 +48,8 @@ body.dark-mode {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999; /* Luôn che phủ Portfolio lúc đầu */
-  transition: opacity 1s ease-out, visibility 1s;
+  z-index: 9999; 
+  transition: opacity 0.8s ease-out, visibility 0.8s;
   user-select: none;
 }
 
@@ -71,7 +67,6 @@ body.dark-mode {
   gap: 20px;
 }
 
-/* Hộp nhiệm vụ hướng dẫn người xem */
 #mission-box {
   position: absolute;
   top: 20px;
@@ -96,7 +91,6 @@ body.dark-mode {
   50% { top: 30px; }
 }
 
-/* Thư mục Folder trên màn hình XP */
 .icon {
   width: 85px;
   height: 75px;
@@ -116,7 +110,6 @@ body.dark-mode {
   margin-bottom: 5px;
 }
 
-/* Thanh tác vụ bên dưới */
 #taskbar {
   width: 100%;
   height: 30px;
@@ -131,7 +124,7 @@ body.dark-mode {
 
 #start-button {
   height: 100%;
-  padding: 0 15px;
+  padding: 0 15px 0 10px;
   background: linear-gradient(to bottom, #60af37 0%, #539e2e 9%, #438522 18%, #326417 92%, #264e10 100%);
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -142,6 +135,14 @@ body.dark-mode {
   font-weight: bold;
   font-style: italic;
   font-family: Tahoma, Arial, sans-serif;
+  gap: 6px;
+}
+
+/* Kích thước Logo Win XP ở nút Start */
+.start-logo {
+  height: 16px;
+  width: auto;
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5));
 }
 
 #system-tray {
@@ -156,12 +157,12 @@ body.dark-mode {
 }
 
 /* ==========================================================================
-   3. CẤU HÌNH MENU CHUỘT PHẢI PHÂN CẤP (CONTEXT MENU)
+   3. MENU CHUỘT PHẢI
    ========================================================================== */
 #context-menu {
   display: none;
   position: absolute;
-  background: #f0f0f0; /* Màu nền xám của Win XP */
+  background: #f0f0f0; 
   border: 1px solid #716f64;
   box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   z-index: 10001;
@@ -186,27 +187,18 @@ body.dark-mode {
   margin: 3px 2px;
 }
 
-/* KHÓA CHỨC NĂNG: Làm mờ và chặn tương tác chuột */
 .menu-item.disabled, .submenu-item.disabled {
   opacity: 0.4;
-  pointer-events: none; /* Khóa hoàn toàn, không thể click */
+  pointer-events: none; 
   background: transparent !important;
   color: #555 !important;
 }
 
-.submenu-arrow {
-  font-size: 8px;
-}
+.submenu-arrow { font-size: 8px; }
+.menu-item.has-submenu:hover { background: #316ac5; color: #fff; }
 
-/* Hover vào mục New hợp lệ */
-.menu-item.has-submenu:hover {
-  background: #316ac5;
-  color: #fff;
-}
-
-/* Bảng menu con (Submenu) */
 .submenu {
-  display: none; /* Ẩn mặc định */
+  display: none;
   position: absolute;
   top: -3px;
   left: 98%;
@@ -217,44 +209,78 @@ body.dark-mode {
   min-width: 180px;
 }
 
-/* Di chuột vào New thì hiện menu con */
-.menu-item.has-submenu:hover .submenu {
-  display: block;
-}
+.menu-item.has-submenu:hover .submenu { display: block; }
+.submenu-item { padding: 4px 10px 4px 6px; display: flex; align-items: center; color: #000; gap: 5px; }
+.submenu-item:not(.disabled):hover { background: #316ac5; color: #fff; }
+.menu-icon { width: 16px; height: 16px; }
 
-.submenu-item {
-  padding: 4px 10px 4px 6px;
-  display: flex;
+/* ==========================================================================
+   4. MÀN HÌNH TRUNG GIAN CHÚC MỪNG (THIẾT KẾ GIỚI HẠN GIỐNG ẢNH MẪU)
+   ========================================================================== */
+#congrats-screen {
+  display: none; /* Ẩn ban đầu, chỉ hiện sau khi tạo thư mục */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #121212; /* Màu nền tối huyền bí */
+  z-index: 9998;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  color: #000;
-  gap: 5px;
+  padding: 20px;
+  text-align: center;
+  transition: opacity 0.8s ease-out, visibility 0.8s;
 }
 
-/* Hover vào mục Folder hợp lệ */
-.submenu-item:not(.disabled):hover {
-  background: #316ac5;
-  color: #fff;
+.congrats-text {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 24px;
+  color: #ffffff;
+  max-width: 750px;
+  line-height: 1.6;
+  margin-bottom: 35px;
+  word-wrap: break-word;
 }
 
-.menu-icon {
-  width: 16px;
-  height: 16px;
+/* Nút bấm thiết kế chuẩn màu xanh giống hình ảnh mẫu */
+#view-more-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 14px;
+  font-family: 'Courier New', Courier, monospace;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s, transform 0.2s;
 }
 
-/* Ẩn hoàn toàn Portfolio lúc ban đầu */
+#view-more-btn:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.white-arrow {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   5. STYLE GIAO DIỆN PORTFOLIO CỦA BẠN
+   ========================================================================== */
 #portfolio-screen {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1.5s ease-in;
+  transition: opacity 1.2s ease-in;
   width: 100%;
   height: 100%;
 }
 
-/* ==========================================================================
-   4. STYLE GIAO DIỆN PORTFOLIO CỦA BẠN (GIỮ NGUYÊN GỐC)
-   ========================================================================== */
-
-/* Header */
 header {
   background: linear-gradient(135deg, #ff99cc, #ff66b2);
   color: white;
@@ -262,11 +288,8 @@ header {
   text-align: center;
   border-bottom: 5px dashed #fff;
 }
-body.dark-mode header {
-  background: linear-gradient(135deg, #b30059, #660033);
-}
+body.dark-mode header { background: linear-gradient(135deg, #b30059, #660033); }
 
-/* Navigation */
 nav {
   background: #ffe6f0;
   text-align: center;
@@ -284,7 +307,6 @@ nav a {
 nav a:hover { color: #cc0066; }
 body.dark-mode nav a { color: #ff99cc; }
 
-/* Section */
 section {
   padding: 60px 20px;
   max-width: 1000px;
@@ -299,7 +321,6 @@ section h2 {
 }
 body.dark-mode section h2 { color: #ff99cc; }
 
-/* Project cards */
 .project {
   background: #fff0f6;
   border-radius: 20px;
@@ -314,7 +335,6 @@ body.dark-mode section h2 { color: #ff99cc; }
 }
 body.dark-mode .project { background: #333; box-shadow: 0 4px 15px rgba(255,255,255,0.1); }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 20px;
@@ -325,7 +345,6 @@ footer {
 }
 body.dark-mode footer { background: #660033; }
 
-/* Dark Mode Button */
 .dark-toggle {
   position: fixed;
   top: 20px;
@@ -341,7 +360,7 @@ body.dark-mode footer { background: #660033; }
 }
 
 /* ==========================================================================
-   5. CẤU HÌNH HIỆU ỨNG SCROLL REVEAL
+   6. CẤU HÌNH HIỆU ỨNG SCROLL REVEAL
    ========================================================================== */
 .reveal-on-scroll {
   opacity: 0;
