@@ -20,7 +20,7 @@ body {
   transition: background 0.5s, color 0.5s;
   overflow: hidden; 
 
-  cursor: url('cursor.png') 0 0, auto !important;
+ cursor: url('cursor.png') 0 0, auto !important;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   image-rendering: pixelated; 
