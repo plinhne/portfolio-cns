@@ -14,13 +14,12 @@ body, html {
 
 body {
   font-family: 'Tahoma', cursive;
-  background: linear-gradient(to right, #ffe6f0, #fff0f6);
+  background: #fff0f6; /* Nền Light Mode: Hồng nhạt */
   color: #444;
   line-height: 1.6;
   transition: background 0.5s, color 0.5s;
   overflow: hidden; 
-
- cursor: url('cursor.png') 0 0, auto !important;
+  cursor: url('cursor.png') 0 0, auto !important;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   image-rendering: pixelated; 
@@ -32,11 +31,6 @@ body {
 
 #start-button, .submenu-item:not(.disabled), .icon, nav a, button, #view-more-btn {
   cursor: url('cursor.png') 0 0, pointer !important;
-}
-
-body.dark-mode {
-  background: #2a2a2a;
-  color: #f1f1f1;
 }
 
 /* ==========================================================================
@@ -217,14 +211,14 @@ body.dark-mode {
    4. MÀN HÌNH TRUNG GIAN CHÚC MỪNG (CHE PHỦ TUYỆT ĐỐI)
    ========================================================================== */
 #congrats-screen {
-  display: none; /* Cài đặt ẩn lúc đầu */
-  position: fixed; /* Ghim cứng toàn màn hình */
+  display: none;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #121212; /* Màu đen che khuất hoàn toàn Portfolio */
-  z-index: 10005; /* Tầng siêu cao đè lên mọi thứ */
+  background-color: #121212; 
+  z-index: 10005; 
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -269,108 +263,12 @@ body.dark-mode {
 }
 
 /* ==========================================================================
-   5. STYLE GIAO DIỆN PORTFOLIO CỦA BẠN
-   ========================================================================== */
-#portfolio-screen {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 1.2s ease-in;
-  width: 100%;
-  height: 100%;
-}
-
-body.dark-mode header { background: linear-gradient(135deg, #b30059, #660033); }
-
-nav {
-  background: #ffe6f0;
-  text-align: center;
-  padding: 15px;
-  border-bottom: 2px solid #ff99cc;
-}
-body.dark-mode nav { background: #1e1e1e; }
-nav a {
-  margin: 0 20px;
-  text-decoration: none;
-  color: #ff3399;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-nav a:hover { color: #cc0066; }
-body.dark-mode nav a { color: #ff99cc; }
-
-section {
-  padding: 60px 20px;
-  max-width: 1000px;
-  margin: auto;
-}
-section h2 {
-  color: #ff3399;
-  margin-bottom: 20px;
-  font-size: 2em;
-  border-left: 5px solid #ff99cc;
-  padding-left: 10px;
-}
-body.dark-mode section h2 { color: #ff99cc; }
-
-.project {
-  background: #fff0f6;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(255,105,180,0.3);
-  padding: 25px;
-  margin-bottom: 25px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s ease-out;
-}
-.project.active:hover { 
-  transform: scale(1.03) translateY(0); 
-  box-shadow: 0 6px 20px rgba(255,20,147,0.4); 
-}
-body.dark-mode .project { background: #333; box-shadow: 0 4px 15px rgba(255,255,255,0.1); }
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #ff99cc;
-  color: white;
-  font-size: 0.9em;
-  border-top: 5px dashed #fff;
-}
-body.dark-mode footer { background: #660033; }
-
-.dark-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 20px;
-  background: #ff66b2;
-  color: white;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  z-index: 1000;
-}
-
-/* ==========================================
-   6. CẤU HÌNH HIỆU ỨNG SCROLL REVEAL
-   ========================================== */
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(35px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  will-change: opacity, transform;
-}
-
-.reveal-on-scroll.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-/* ==========================================================================
-   7. NÚT THOÁT GAME (Ở GÓC MISSION-BOX)
+   5. NÚT THOÁT GAME (Ở GÓC MISSION-BOX)
    ========================================================================== */
 .skip-game-container {
   position: absolute;
-  top: -10px;    /* Đẩy nút X nhô lên khỏi mép trên của bảng 1 chút */
-  right: -10px;  /* Đẩy nút X nhô ra khỏi mép phải của bảng 1 chút */
+  top: -10px;    
+  right: -10px;  
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -379,7 +277,7 @@ body.dark-mode footer { background: #660033; }
 
 .close-btn {
   background: #ff4d4d;
-  border: 2px solid #fff; /* Viền trắng cho giống nút tắt cửa sổ */
+  border: 2px solid #fff; 
   color: #ffffff;
   font-size: 12px;
   font-family: Tahoma, Arial, sans-serif;
@@ -397,10 +295,9 @@ body.dark-mode footer { background: #660033; }
 
 .close-btn:hover {
   background: #e60000;
-  transform: scale(1.15); /* Phóng to nhẹ khi hover */
+  transform: scale(1.15); 
 }
 
-/* Dòng chữ nhỏ "thoát game :(?" */
 .tooltip-text {
   visibility: hidden;
   width: max-content;
@@ -423,18 +320,27 @@ body.dark-mode footer { background: #660033; }
 }
 
 /* ==========================================================================
-   8. HEADER CÔNG NGHỆ (INTERACTIVE BACKGROUND)
+   6. HEADER CÔNG NGHỆ (FULL 100VH)
    ========================================================================== */
+#portfolio-screen {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.2s ease-in;
+  width: 100%;
+  height: 100%;
+}
+
 #tech-header {
   position: relative;
   width: 100%;
-  height: 400px; /* Bạn có thể tăng/giảm độ cao của phần nền này */
-  background-color: #050505; /* Nền đen đậm */
+  height: 100vh; /* Rộng vừa vặn 1 trang */
+  background-color: #ffb3d9; /* Nền Light Mode: Hồng */
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 2px solid #00ff00; /* Viền xanh lá */
+  border-bottom: 4px solid #ff3399; 
+  transition: background-color 0.5s;
 }
 
 #tech-canvas {
@@ -443,29 +349,172 @@ body.dark-mode footer { background: #660033; }
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1; /* Nằm dưới chữ */
+  z-index: 1; 
 }
 
 .header-content {
   position: relative;
-  z-index: 2; /* Nổi lên trên nền canvas */
+  z-index: 2; 
   text-align: center;
-  color: #00ff00; /* Chữ màu xanh công nghệ */
-  pointer-events: none; /* Tránh việc chữ chặn tương tác chuột với canvas */
+  pointer-events: none; 
 }
 
 .header-content h1 {
-  font-size: 3.5em;
+  font-size: 4em;
   font-family: 'Courier New', Courier, monospace;
   text-transform: uppercase;
   letter-spacing: 4px;
-  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  color: #ffffff; 
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   margin-bottom: 10px;
 }
 
 .header-content p {
-  color: #e0e0e0;
+  color: #fff;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 1.2em;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  font-size: 1.3em;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  margin-bottom: 25px;
+}
+
+.dark-toggle {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 30px;
+  border: 2px solid #fff;
+  border-radius: 25px;
+  background: #ff66b2; /* Nút hồng */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Tahoma', sans-serif;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  cursor: pointer;
+  pointer-events: auto; /* Cho phép click */
+  transition: all 0.3s;
+}
+
+.dark-toggle:hover {
+  background: #ff3399;
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   7. PHẦN CÒN LẠI CỦA PORTFOLIO (LIGHT MODE)
+   ========================================================================== */
+nav {
+  background: #ffffff; 
+  text-align: center;
+  padding: 15px;
+  border-bottom: 2px solid #ff99cc;
+}
+nav a {
+  margin: 0 20px;
+  text-decoration: none;
+  color: #ff3399; 
+  font-weight: bold;
+  transition: color 0.3s;
+}
+nav a:hover { color: #cc0066; }
+
+section {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+section h2 {
+  color: #ff3399;
+  margin-bottom: 20px;
+  font-size: 2em;
+  border-left: 5px solid #ff99cc;
+  padding-left: 10px;
+}
+
+.project {
+  background: #ffffff; 
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(255,105,180,0.2);
+  padding: 25px;
+  margin-bottom: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s ease-out;
+}
+.project.active:hover { 
+  transform: scale(1.03) translateY(0); 
+  box-shadow: 0 6px 20px rgba(255,20,147,0.4); 
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #ff99cc;
+  color: white;
+  font-size: 0.9em;
+  border-top: 5px dashed #fff;
+}
+
+/* ==========================================
+   8. HIỆU ỨNG TRƯỢT (SCROLL REVEAL)
+   ========================================== */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+.reveal-on-scroll.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   9. DARK MODE (ĐEN & XANH DƯƠNG)
+   ========================================================================== */
+body.dark-mode {
+  background: #0a0a0a; 
+  color: #f1f1f1;
+}
+
+/* Header Dark Mode */
+body.dark-mode #tech-header {
+  background-color: #050505; 
+  border-bottom: 4px solid #0055ff; 
+}
+body.dark-mode .header-content h1 {
+  color: #0055ff; 
+  text-shadow: 0 0 10px rgba(0, 85, 255, 0.8);
+}
+body.dark-mode .header-content p {
+  color: #e0e0e0;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+body.dark-mode .dark-toggle {
+  background: #0055ff; 
+  border: 2px solid #0055ff;
+}
+body.dark-mode .dark-toggle:hover {
+  background: #0033cc;
+}
+
+/* Các thành phần khác Dark Mode */
+body.dark-mode nav {
+  background: #111111; 
+  border-bottom: 2px solid #0055ff; 
+}
+body.dark-mode nav a { color: #3388ff; } 
+body.dark-mode nav a:hover { color: #66aaff; }
+
+body.dark-mode section h2 { 
+  color: #3388ff; 
+  border-left: 5px solid #0055ff; 
+}
+body.dark-mode .project { 
+  background: #1a1a1a; 
+  box-shadow: 0 4px 15px rgba(0,85,255,0.2); 
+}
+body.dark-mode .project.active:hover {
+  box-shadow: 0 6px 20px rgba(0,85,255,0.5); 
+}
+body.dark-mode footer { 
+  background: #001a4d; 
+  border-top: 5px dashed #0055ff; 
 }

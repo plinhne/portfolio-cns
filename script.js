@@ -25,7 +25,7 @@ document.addEventListener('click', function() {
     if (contextMenu) contextMenu.style.display = 'none';
 });
 
-// GIAI ĐOẠN 1: Tạo folder -> Bắn pháo hoa -> Kích hoạt màn hình đen
+// Tạo folder -> Bắn pháo hoa -> Kích hoạt màn hình đen
 function createNewFolder() {
     if (!desktop) return;
 
@@ -38,18 +38,14 @@ function createNewFolder() {
     desktop.appendChild(newFolder);
     contextMenu.style.display = 'none';
 
-    // Kích hoạt pháo hoa liên tục từ thư viện mới
-// Kích hoạt pháo hoa theo chuẩn cú pháp thư viện @hiseb/confetti
-try {
-    if (typeof confetti === 'function') {
-        confetti(); // Chỉ gọi một hàm duy nhất để bắn chùm pháo hoa mặc định
+    try {
+        if (typeof confetti === 'function') {
+            confetti(); 
+        }
+    } catch (error) {
+        console.log("Lỗi nạp hiệu ứng pháo hoa.");
     }
-} catch (error) {
-    console.log("Lỗi nạp hiệu ứng pháo hoa.");
-}
 
-
-    // Làm mờ Windows XP và chuyển sang chế độ hiển thị màn hình chúc mừng màu đen che phủ
     setTimeout(() => {
         if (xpScreen && congratsScreen) {
             xpScreen.style.opacity = '0';
@@ -61,7 +57,7 @@ try {
     }, 2200);
 }
 
-// GIAI ĐOẠN 2: Bấm nút Xem đầy đủ portfolio -> Reveal mở màn hình Portfolio chính
+// Bấm nút Xem đầy đủ portfolio
 function revealPortfolio() {
     if (!congratsScreen || !portfolioScreen) return;
 
@@ -73,10 +69,8 @@ function revealPortfolio() {
         portfolioScreen.style.visibility = 'visible';
         portfolioScreen.style.opacity = '1';
         
-        // Mở khóa thanh cuộn dọc cho trình duyệt
         document.body.style.overflow = 'auto'; 
         
-        // Kích hoạt ngay hiệu ứng trượt cuộn các Project đầu tiên
         if (typeof handleScrollReveal === 'function') {
             handleScrollReveal();
         }
@@ -135,29 +129,23 @@ const skipBtn = document.getElementById('skip-btn');
 
 if (skipBtn) {
     skipBtn.addEventListener('click', function(e) {
-        // Ngăn chặn sự kiện click truyền xuống phía dưới (tránh lỗi context menu)
         e.stopPropagation();
 
-        // 1. Ẩn màn hình XP hiện tại
         if (xpScreen) {
             xpScreen.style.opacity = '0';
             xpScreen.style.visibility = 'hidden';
         }
         
-        // 2. Đảm bảo màn hình chúc mừng màu đen (congrats-screen) không hiện ra
         if (congratsScreen) {
             congratsScreen.style.display = 'none';
         }
 
-        // 3. Hiện thẳng màn hình Portfolio chính
         if (portfolioScreen) {
             portfolioScreen.style.visibility = 'visible';
             portfolioScreen.style.opacity = '1';
             
-            // Mở khóa thanh cuộn dọc cho trình duyệt
             document.body.style.overflow = 'auto'; 
             
-            // Kích hoạt ngay hiệu ứng trượt cuộn các Project đầu tiên
             if (typeof handleScrollReveal === 'function') {
                 handleScrollReveal();
             }
@@ -166,7 +154,7 @@ if (skipBtn) {
 }
 
 // ==========================================================================
-// 5. HIỆU ỨNG CANVAS CÔNG NGHỆ (DÒNG KẺ XANH THEO CHUỘT)
+// 5. HIỆU ỨNG CANVAS CÔNG NGHỆ (DÒNG KẺ THEO CHUỘT)
 // ==========================================================================
 const canvas = document.getElementById('tech-canvas');
 if (canvas) {
@@ -174,7 +162,6 @@ if (canvas) {
     let width, height;
     let particles = [];
     
-    // Cấu hình chuột
     const mouse = { x: null, y: null, radius: 150 };
 
     function resize() {
@@ -185,25 +172,22 @@ if (canvas) {
     window.addEventListener('resize', resize);
     resize();
 
-    // Lấy tọa độ chuột khi di chuyển trong khu vực header
     canvas.parentElement.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
         mouse.y = e.clientY - rect.top;
     });
 
-    // Xóa tọa độ khi chuột rời khỏi
     canvas.parentElement.addEventListener('mouseleave', () => {
         mouse.x = null;
         mouse.y = null;
     });
 
-    // Lớp Hạt (các chấm xanh)
     class Particle {
         constructor() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 1.5; // Tốc độ di chuyển
+            this.vx = (Math.random() - 0.5) * 1.5; 
             this.vy = (Math.random() - 0.5) * 1.5;
         }
         
@@ -211,11 +195,9 @@ if (canvas) {
             this.x += this.vx;
             this.y += this.vy;
 
-            // Bật lại khi đập tường
             if (this.x < 0 || this.x > width) this.vx *= -1;
             if (this.y < 0 || this.y > height) this.vy *= -1;
 
-            // Tương tác chuột: Bị hút về phía chuột
             if (mouse.x != null && mouse.y != null) {
                 let dx = mouse.x - this.x;
                 let dy = mouse.y - this.y;
@@ -223,7 +205,6 @@ if (canvas) {
                 if (distance < mouse.radius) {
                     const forceDirectionX = dx / distance;
                     const forceDirectionY = dy / distance;
-                    // Càng gần chuột hút càng mạnh
                     const force = (mouse.radius - distance) / mouse.radius; 
                     this.x += forceDirectionX * force * 3;
                     this.y += forceDirectionY * force * 3;
@@ -234,14 +215,15 @@ if (canvas) {
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
-            ctx.fillStyle = '#00ff00';
+            // Màu đổi theo chế độ
+            const isDark = document.body.classList.contains('dark-mode');
+            ctx.fillStyle = isDark ? '#0055ff' : '#ffffff'; 
             ctx.fill();
         }
     }
 
     function init() {
         particles = [];
-        // Mật độ hạt tùy theo diện tích màn hình
         let numberOfParticles = (width * height) / 7000;
         for (let i = 0; i < numberOfParticles; i++) {
             particles.push(new Particle());
@@ -256,16 +238,17 @@ if (canvas) {
             particles[i].update();
             particles[i].draw();
             
-            // Vẽ các dòng kẻ nối giữa các điểm gần nhau
             for (let j = i; j < particles.length; j++) {
                 let dx = particles[i].x - particles[j].x;
                 let dy = particles[i].y - particles[j].y;
                 let distance = Math.sqrt(dx * dx + dy * dy);
                 
-                if (distance < 100) { // Khoảng cách để nối dây
+                if (distance < 100) { 
                     ctx.beginPath();
-                    // Độ mờ của dây tỷ lệ nghịch với khoảng cách
-                    ctx.strokeStyle = `rgba(0, 255, 0, ${1 - distance/100})`;
+                    const isDark = document.body.classList.contains('dark-mode');
+                    const alpha = 1 - distance/100;
+                    // Dây nối đổi màu theo chế độ
+                    ctx.strokeStyle = isDark ? `rgba(0, 85, 255, ${alpha})` : `rgba(255, 255, 255, ${alpha})`;
                     ctx.lineWidth = 1;
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);

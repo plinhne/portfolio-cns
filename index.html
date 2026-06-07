@@ -5,15 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🌸 Portfolio Cá Nhân 🌸</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Thư viện pháo hoa tương thích 100% -->
   <script src="https://cdn.jsdelivr.net/npm/@hiseb/confetti@2.1.0/dist/confetti.min.js"></script>
   <script src="script.js" defer></script>
 </head>
 <body>
 
-  <!-- ==========================================================================
-       PHẦN 1: MÀN HÌNH CHỜ WINDOWS XP
-       ========================================================================== -->
   <div id="xp-screen">
     
     <div id="mission-box">
@@ -23,7 +19,9 @@
         <button id="skip-btn" class="close-btn">X</button>
         <span class="tooltip-text">thoát game :(?</span>
       </div>
-    </div> <div id="desktop"></div>
+    </div> 
+    
+    <div id="desktop"></div>
 
     <div id="context-menu">
         <div class="menu-item disabled">View</div>
@@ -61,29 +59,24 @@
 
   </div>
 
-  <!-- ==========================================================================
-       PHẦN 2: MÀN HÌNH TRUNG GIAN MÀU ĐEN (CHE PHỦ TUYỆT ĐỐI)
-       ========================================================================== -->
   <div id="congrats-screen">
     <div class="congrats-text">
       Chúc mừng bạn đã hoàn thành tạo thư mục cơ bản - 1 phần nhỏ trong các bài tập của mình, bấm xem thêm để biết thêm thông tin....
     </div>
-    <!-- Nút bấm chứa văn bản và mũi tên màu trắng -->
     <button id="view-more-btn" onclick="revealPortfolio()">
       Xem đầy đủ portfolio <span class="white-arrow">➔</span>
     </button>
   </div>
 
-  <!-- ==========================================================================
-       PHẦN 3: TOÀN BỘ NỘI DUNG PORTFOLIO CỦA BẠN
-       ========================================================================== -->
   <div id="portfolio-screen">
+    
    <header id="tech-header">
       <canvas id="tech-canvas"></canvas>
       
       <div class="header-content">
         <h1>Portfolio cá nhân</h1>
         <p>Website lưu trữ và trình bày các sản phẩm học tập</p>
+        <button id="toggle-dark" class="dark-toggle">🌙 Dark Mode</button>
       </div>
     </header>
 
@@ -92,8 +85,6 @@
       <a href="#projects">Dự án</a>
       <a href="#summary">Tổng kết</a>
     </nav>
-
-    <button id="toggle-dark" class="dark-toggle">🌙 Dark Mode</button>
 
     <section id="about" class="reveal-on-scroll">
       <h2>Giới thiệu</h2>
@@ -109,32 +100,32 @@
       <div class="project reveal-on-scroll">
         <h3>🍓 Bài 1 - Quản lý tệp và thư mục</h3>
         <p>Mục tiêu: Thao tác cơ bản với tệp tin và thư mục.</p>
-        <p>Sản phẩm: <a href="baitap1.pdf">Xem file PDF</a></p>
+        <p>Sản phẩm: <a href="baitap1.pdf" target="_blank">Xem file PDF</a></p>
       </div>
       <div class="project reveal-on-scroll">
         <h3>🍰 Bài 2 - Tìm kiếm & đánh giá thông tin</h3>
         <p>Mục tiêu: Tìm kiếm học thuật bằng toán tử nâng cao và đánh giá nguồn tin.</p>
-        <p>Sản phẩm: <a href="baitap2.pdf">Xem file PDF</a></p>
+        <p>Sản phẩm: <a href="baitap2.pdf" target="_blank">Xem file PDF</a></p>
       </div>
       <div class="project reveal-on-scroll">
         <h3>🍭 Bài 3 - Viết Prompt hiệu quả</h3>
         <p>Mục tiêu: So sánh Prompt ban đầu và Prompt cải tiến cùng kết quả AI.</p>
-        <p>Sản phẩm: <a href="baitap3.pdf">Xem file PDF</a></p>
+        <p>Sản phẩm: <a href="baitap3.pdf" target="_blank">Xem file PDF</a></p>
       </div>
       <div class="project reveal-on-scroll">
         <h3>🍡 Bài 4 - Hợp tác trực tuyến</h3>
         <p>Mục tiêu: Minh chứng sử dụng công cụ quản lý dự án nhóm và phối hợp trực tuyến.</p>
-        <p>Sản phẩm: <a href="baitap4.pdf">Xem file PDF</a></p>
+        <p>Sản phẩm: <a href="baitap4.pdf" target="_blank">Xem file PDF</a></p>
       </div>
       <div class="project reveal-on-scroll">
         <h3>🍩 Bài 5 - Sáng tạo nội dung với AI</h3>
         <p>Mục tiêu: Trưng bày sản phẩm nội dung số hoàn thiện (hình ảnh, video, bài viết).</p>
-        <p>Sản phẩm: <a href="baitap5.pdf">Xem file PDF</a></p>
+        <p>Sản phẩm: <a href="baitap5.pdf" target="_blank">Xem file PDF</a></p>
       </div>
       <div class="project reveal-on-scroll">
         <h3>🌷 Bài 6 - AI có trách nhiệm</h3>
         <p>Mục tiêu: Trình bày nguyên tắc và ví dụ sử dụng AI có trách nhiệm.</p>
-        <p>Sản phẩm: <a href="baitap6.pdf">Xem file PDF</a></p>
+        <p>Sản phẩm: <a href="baitap6.pdf" target="_blank">Xem file PDF</a></p>
       </div>
     </section>
 
