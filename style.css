@@ -371,3 +371,60 @@ body.dark-mode footer { background: #660033; }
   opacity: 1;
   transform: translateY(0);
 }
+/* ==========================================================================
+   7. NÚT THOÁT GAME (Ở GÓC MISSION-BOX)
+   ========================================================================== */
+.skip-game-container {
+  position: absolute;
+  top: -10px;    /* Đẩy nút X nhô lên khỏi mép trên của bảng 1 chút */
+  right: -10px;  /* Đẩy nút X nhô ra khỏi mép phải của bảng 1 chút */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 10001;
+}
+
+.close-btn {
+  background: #ff4d4d;
+  border: 2px solid #fff; /* Viền trắng cho giống nút tắt cửa sổ */
+  color: #ffffff;
+  font-size: 12px;
+  font-family: Tahoma, Arial, sans-serif;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+
+.close-btn:hover {
+  background: #e60000;
+  transform: scale(1.15); /* Phóng to nhẹ khi hover */
+}
+
+/* Dòng chữ nhỏ "thoát game :(?" */
+.tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  margin-top: 6px;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  font-family: Tahoma, Arial, sans-serif;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+
+.skip-game-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
