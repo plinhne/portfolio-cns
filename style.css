@@ -318,7 +318,8 @@ footer {
    ========================================================================== */
 body.dark-mode {
   /* Gradient Đen ở trên, Xanh mòng két (Teal/Slate blue) ở dưới */
-  background: linear-gradient(to bottom, #050505 0%, #1e4554 100%);
+  background-image: linear-gradient(to bottom, #050505 0%, #1e4554 100%);
+  background-attachment: fixed;
   color: #f1f1f1;
 }
 
