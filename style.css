@@ -14,15 +14,30 @@ body, html {
 
 body {
   font-family: 'Tahoma', cursive;
-  background: #fff0f6; /* Nền Light Mode: Hồng nhạt */
+  /* LIGHT MODE: Gradient Trắng ở trên, Hồng ở dưới */
+  background: linear-gradient(to bottom, #ffffff 0%, #ffb3d9 100%);
+  background-attachment: fixed;
   color: #444;
   line-height: 1.6;
   transition: background 0.5s, color 0.5s;
-  overflow: hidden; 
+  overflow-x: hidden; 
+
   cursor: url('cursor.png') 0 0, auto !important;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   image-rendering: pixelated; 
+}
+
+/* HIỆU ỨNG HẠT NOISE (GRAINY BACKGROUND) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  /* Mã base64 tạo hiệu ứng nhiễu hạt */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.12; /* Độ đậm nhạt của hạt */
+  z-index: 0;
 }
 
 #xp-screen, #context-menu, .menu-item, .submenu-item, #desktop, #congrats-screen {
@@ -61,16 +76,19 @@ body {
   gap: 20px;
 }
 
+/* Box hướng dẫn hiệu ứng Kính mờ */
 #mission-box {
   position: absolute;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: #fffbf0;
-  border: 2px solid #004ece;
-  padding: 10px 20px;
-  border-radius: 5px;
-  box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 12px 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
   font-size: 13px;
   font-weight: bold;
   color: #004ece;
@@ -97,55 +115,30 @@ body {
   font-weight: bold;
   font-family: Tahoma, Arial, sans-serif;
 }
-
-.icon img {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 5px;
-}
+.icon img { width: 40px; height: 40px; margin-bottom: 5px; }
 
 #taskbar {
-  width: 100%;
-  height: 30px;
+  width: 100%; height: 30px;
   background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #1b4fa3 92%, #19448a 100%);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: absolute; bottom: 0; left: 0;
+  display: flex; justify-content: space-between; align-items: center;
 }
 
 #start-button {
-  height: 100%;
-  padding: 0 15px 0 10px;
+  height: 100%; padding: 0 15px 0 10px;
   background: linear-gradient(to bottom, #60af37 0%, #539e2e 9%, #438522 18%, #326417 92%, #264e10 100%);
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  display: flex;
-  align-items: center;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-  font-style: italic;
-  font-family: Tahoma, Arial, sans-serif;
-  gap: 6px;
+  border-top-right-radius: 5px; border-bottom-right-radius: 5px;
+  display: flex; align-items: center; color: white;
+  font-size: 14px; font-weight: bold; font-style: italic;
+  font-family: Tahoma, Arial, sans-serif; gap: 6px;
 }
-
-.start-logo {
-  height: 16px;
-  width: auto;
-  filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5));
-}
+.start-logo { height: 16px; width: auto; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)); }
 
 #system-tray {
   height: 100%;
   background: linear-gradient(to bottom, #0c8df2 0%, #0066cc 100%);
-  border-left: 1px solid #10418c;
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
-  color: white;
+  border-left: 1px solid #10418c; padding: 0 10px;
+  display: flex; align-items: center; color: white;
   font-family: Tahoma, Arial, sans-serif;
 }
 
@@ -153,368 +146,226 @@ body {
    3. MENU CHUỘT PHẢI
    ========================================================================== */
 #context-menu {
-  display: none;
-  position: absolute;
-  background: #f0f0f0; 
-  border: 1px solid #716f64;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  z-index: 10001;
-  padding: 2px;
-  min-width: 180px;
-  font-family: Tahoma, Arial, sans-serif;
-  font-size: 11px;
+  display: none; position: absolute; background: #f0f0f0; 
+  border: 1px solid #716f64; box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  z-index: 10001; padding: 2px; min-width: 180px; font-family: Tahoma, Arial, sans-serif; font-size: 11px;
 }
-
-.menu-item {
-  padding: 4px 15px 4px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  color: #000;
-}
-
-.menu-separator {
-  border: none;
-  border-top: 1px solid #aca899;
-  margin: 3px 2px;
-}
-
-.menu-item.disabled, .submenu-item.disabled {
-  opacity: 0.4;
-  pointer-events: none; 
-  background: transparent !important;
-  color: #555 !important;
-}
-
+.menu-item { padding: 4px 15px 4px 25px; display: flex; justify-content: space-between; align-items: center; position: relative; color: #000; }
+.menu-separator { border: none; border-top: 1px solid #aca899; margin: 3px 2px; }
+.menu-item.disabled, .submenu-item.disabled { opacity: 0.4; pointer-events: none; background: transparent !important; color: #555 !important; }
 .submenu-arrow { font-size: 8px; }
 .menu-item.has-submenu:hover { background: #316ac5; color: #fff; }
-
-.submenu {
-  display: none;
-  position: absolute;
-  top: -3px;
-  left: 98%;
-  background: #f0f0f0;
-  border: 1px solid #716f64;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  padding: 2px;
-  min-width: 180px;
-}
-
+.submenu { display: none; position: absolute; top: -3px; left: 98%; background: #f0f0f0; border: 1px solid #716f64; box-shadow: 2px 2px 4px rgba(0,0,0,0.3); padding: 2px; min-width: 180px; }
 .menu-item.has-submenu:hover .submenu { display: block; }
 .submenu-item { padding: 4px 10px 4px 6px; display: flex; align-items: center; color: #000; gap: 5px; }
 .submenu-item:not(.disabled):hover { background: #316ac5; color: #fff; }
 .menu-icon { width: 16px; height: 16px; }
 
 /* ==========================================================================
-   4. MÀN HÌNH TRUNG GIAN CHÚC MỪNG (CHE PHỦ TUYỆT ĐỐI)
+   4. MÀN HÌNH TRUNG GIAN CHÚC MỪNG
    ========================================================================== */
 #congrats-screen {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #121212; 
-  z-index: 10005; 
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  text-align: center;
-  transition: opacity 0.8s ease-out, visibility 0.8s;
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-color: #0d1117; z-index: 10005; flex-direction: column; justify-content: center; align-items: center;
+  padding: 20px; text-align: center; transition: opacity 0.8s ease-out, visibility 0.8s;
 }
-
-.congrats-text {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 24px;
-  color: #ffffff;
-  max-width: 750px;
-  line-height: 1.6;
-  margin-bottom: 35px;
-  word-wrap: break-word;
-}
-
+.congrats-text { font-family: 'Courier New', Courier, monospace; font-size: 24px; color: #ffffff; max-width: 750px; line-height: 1.6; margin-bottom: 35px; word-wrap: break-word; }
 #view-more-btn {
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  padding: 12px 30px;
-  font-size: 14px;
-  font-family: 'Courier New', Courier, monospace;
-  border-radius: 6px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  transition: background 0.3s, transform 0.2s;
+  background-color: #3b82f6; color: white; border: none; padding: 12px 30px; font-size: 14px; font-family: 'Courier New', Courier, monospace;
+  border-radius: 6px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); display: inline-flex; align-items: center; gap: 10px; transition: background 0.3s, transform 0.2s;
 }
-
-#view-more-btn:hover {
-  background-color: #2563eb;
-  transform: translateY(-1px);
-}
-
-.white-arrow {
-  font-size: 16px;
-  color: #ffffff;
-}
+#view-more-btn:hover { background-color: #2563eb; transform: translateY(-1px); }
+.white-arrow { font-size: 16px; color: #ffffff; }
 
 /* ==========================================================================
    5. NÚT THOÁT GAME (Ở GÓC MISSION-BOX)
    ========================================================================== */
 .skip-game-container {
-  position: absolute;
-  top: -10px;    
-  right: -10px;  
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  z-index: 10001;
+  position: absolute; top: -10px; right: -10px; display: flex; flex-direction: column; align-items: flex-end; z-index: 10001;
 }
-
 .close-btn {
-  background: #ff4d4d;
-  border: 2px solid #fff; 
-  color: #ffffff;
-  font-size: 12px;
-  font-family: Tahoma, Arial, sans-serif;
-  font-weight: bold;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+  background: #ff4d4d; border: 2px solid #fff; color: #ffffff; font-size: 12px; font-family: Tahoma, Arial, sans-serif; font-weight: bold;
+  border-radius: 50%; width: 24px; height: 24px; display: flex; justify-content: center; align-items: center; cursor: pointer;
+  transition: transform 0.2s, background 0.2s; box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
 }
-
-.close-btn:hover {
-  background: #e60000;
-  transform: scale(1.15); 
-}
-
+.close-btn:hover { background: #e60000; transform: scale(1.15); }
 .tooltip-text {
-  visibility: hidden;
-  width: max-content;
-  background-color: rgba(0, 0, 0, 0.85);
-  color: #fff;
-  text-align: center;
-  border-radius: 4px;
-  padding: 4px 8px;
-  font-size: 11px;
-  margin-top: 6px;
-  opacity: 0;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  font-family: Tahoma, Arial, sans-serif;
+  visibility: hidden; width: max-content; background-color: rgba(0, 0, 0, 0.85); color: #fff; text-align: center; border-radius: 4px;
+  padding: 4px 8px; font-size: 11px; margin-top: 6px; opacity: 0; transition: opacity 0.3s ease, visibility 0.3s ease; font-family: Tahoma, Arial, sans-serif;
   box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
 }
-
-.skip-game-container:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
-}
+.skip-game-container:hover .tooltip-text { visibility: visible; opacity: 1; }
 
 /* ==========================================================================
-   6. HEADER CÔNG NGHỆ (FULL 100VH)
+   6. HEADER CÔNG NGHỆ (FULL 100VH) XUYÊN THẤU
    ========================================================================== */
 #portfolio-screen {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 1.2s ease-in;
-  width: 100%;
-  height: 100%;
+  opacity: 0; visibility: hidden; transition: opacity 1.2s ease-in; width: 100%; height: 100%; position: relative; z-index: 1;
 }
 
 #tech-header {
   position: relative;
   width: 100%;
-  height: 100vh; /* Rộng vừa vặn 1 trang */
-  background-color: #ffb3d9; /* Nền Light Mode: Hồng */
+  height: 100vh;
+  background-color: transparent; /* Để lộ nền body gradient bên dưới */
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 4px solid #ff3399; 
-  transition: background-color 0.5s;
 }
 
 #tech-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1; 
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; 
 }
 
 .header-content {
-  position: relative;
-  z-index: 2; 
-  text-align: center;
-  pointer-events: none; 
+  position: relative; z-index: 2; text-align: center; pointer-events: none; 
 }
 
 .header-content h1 {
   font-size: 4em;
   font-family: 'Courier New', Courier, monospace;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  color: #ffffff; 
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  text-transform: uppercase; letter-spacing: 4px;
+  color: #333; /* Chữ đậm màu xám ở Light Mode */
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
   margin-bottom: 10px;
 }
 
 .header-content p {
-  color: #fff;
+  color: #444;
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.3em;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   margin-bottom: 25px;
 }
 
 .dark-toggle {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 12px 30px;
-  border: 2px solid #fff;
+  display: inline-block; margin-top: 15px; padding: 12px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 25px;
-  background: #ff66b2; /* Nút hồng */
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  font-family: 'Tahoma', sans-serif;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  cursor: pointer;
-  pointer-events: auto; /* Cho phép click */
-  transition: all 0.3s;
+  /* Hiệu ứng kính cho nút */
+  background: rgba(255, 102, 178, 0.8);
+  backdrop-filter: blur(5px);
+  color: white; font-size: 16px; font-weight: bold; font-family: 'Tahoma', sans-serif;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); cursor: pointer; pointer-events: auto; transition: all 0.3s;
 }
-
-.dark-toggle:hover {
-  background: #ff3399;
-  transform: scale(1.05);
-}
+.dark-toggle:hover { background: #ff3399; transform: scale(1.05); }
 
 /* ==========================================================================
-   7. PHẦN CÒN LẠI CỦA PORTFOLIO (LIGHT MODE)
+   7. PHẦN CÒN LẠI CỦA PORTFOLIO (GLASSMORPHISM TEXTBOX)
    ========================================================================== */
 nav {
-  background: #ffffff; 
+  /* Hiệu ứng hộp kính (Trắng nhạt, mờ) */
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 40px;
+  margin: 20px auto;
+  max-width: 600px;
   text-align: center;
   padding: 15px;
-  border-bottom: 2px solid #ff99cc;
+  box-shadow: 0 8px 32px 0 rgba(255, 153, 204, 0.2);
+  position: relative;
+  z-index: 2;
 }
 nav a {
-  margin: 0 20px;
-  text-decoration: none;
-  color: #ff3399; 
-  font-weight: bold;
-  transition: color 0.3s;
+  margin: 0 20px; text-decoration: none; color: #ff3399; font-weight: bold; transition: color 0.3s;
 }
 nav a:hover { color: #cc0066; }
 
 section {
-  padding: 60px 20px;
-  max-width: 1000px;
-  margin: auto;
+  padding: 60px 20px; max-width: 1000px; margin: auto; position: relative; z-index: 2;
 }
 section h2 {
-  color: #ff3399;
-  margin-bottom: 20px;
-  font-size: 2em;
-  border-left: 5px solid #ff99cc;
-  padding-left: 10px;
+  color: #ff3399; margin-bottom: 20px; font-size: 2em; border-left: 5px solid #ff99cc; padding-left: 10px;
 }
 
 .project {
-  background: #ffffff; 
+  /* Hiệu ứng hộp kính cho Card */
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(255,105,180,0.2);
-  padding: 25px;
-  margin-bottom: 25px;
+  box-shadow: 0 8px 32px 0 rgba(255, 153, 204, 0.2);
+  padding: 25px; margin-bottom: 25px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s ease-out;
 }
 .project.active:hover { 
-  transform: scale(1.03) translateY(0); 
-  box-shadow: 0 6px 20px rgba(255,20,147,0.4); 
+  transform: scale(1.02) translateY(-2px); 
+  box-shadow: 0 12px 40px 0 rgba(255, 105, 180, 0.3); 
 }
 
 footer {
-  text-align: center;
-  padding: 20px;
-  background: #ff99cc;
-  color: white;
-  font-size: 0.9em;
-  border-top: 5px dashed #fff;
+  text-align: center; padding: 20px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  color: #ff3399; font-size: 0.9em; font-weight: bold;
 }
 
 /* ==========================================
    8. HIỆU ỨNG TRƯỢT (SCROLL REVEAL)
    ========================================== */
 .reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(35px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  will-change: opacity, transform;
+  opacity: 0; transform: translateY(35px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; will-change: opacity, transform;
 }
-.reveal-on-scroll.active {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal-on-scroll.active { opacity: 1; transform: translateY(0); }
 
 /* ==========================================================================
-   9. DARK MODE (ĐEN & XANH DƯƠNG)
+   9. DARK MODE (ĐEN ĐỈNH -> XANH MÒNG KÉT ĐÁY, GIỐNG ẢNH TẢI LÊN)
    ========================================================================== */
 body.dark-mode {
-  background: #0a0a0a; 
+  /* Gradient Đen ở trên, Xanh mòng két (Teal/Slate blue) ở dưới */
+  background: linear-gradient(to bottom, #050505 0%, #1e4554 100%);
   color: #f1f1f1;
 }
 
-/* Header Dark Mode */
-body.dark-mode #tech-header {
-  background-color: #050505; 
-  border-bottom: 4px solid #0055ff; 
+body.dark-mode::before {
+  opacity: 0.15; /* Hạt mờ nổi bật hơn một chút trong nền tối */
 }
+
+/* Header Dark Mode */
 body.dark-mode .header-content h1 {
-  color: #0055ff; 
-  text-shadow: 0 0 10px rgba(0, 85, 255, 0.8);
+  color: #a3d9eb; /* Xanh nhạt sáng */
+  text-shadow: 0 0 15px rgba(163, 217, 235, 0.4);
 }
 body.dark-mode .header-content p {
   color: #e0e0e0;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 }
 body.dark-mode .dark-toggle {
-  background: #0055ff; 
-  border: 2px solid #0055ff;
+  background: rgba(43, 93, 114, 0.8); /* Màu teal nhạt cho nút */
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 body.dark-mode .dark-toggle:hover {
-  background: #0033cc;
+  background: rgba(62, 126, 153, 0.9);
 }
 
-/* Các thành phần khác Dark Mode */
+/* Glassmorphism Dark Mode */
 body.dark-mode nav {
-  background: #111111; 
-  border-bottom: 2px solid #0055ff; 
+  background: rgba(20, 30, 40, 0.4); /* Kính đen mờ */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
-body.dark-mode nav a { color: #3388ff; } 
-body.dark-mode nav a:hover { color: #66aaff; }
+body.dark-mode nav a { color: #88c0d0; } /* Xanh teal sáng */
+body.dark-mode nav a:hover { color: #a3d9eb; }
 
 body.dark-mode section h2 { 
-  color: #3388ff; 
-  border-left: 5px solid #0055ff; 
+  color: #88c0d0; 
+  border-left: 5px solid #4c8296; 
 }
 body.dark-mode .project { 
-  background: #1a1a1a; 
-  box-shadow: 0 4px 15px rgba(0,85,255,0.2); 
+  background: rgba(25, 35, 45, 0.5); /* Kính đen mờ */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4); 
 }
 body.dark-mode .project.active:hover {
-  box-shadow: 0 6px 20px rgba(0,85,255,0.5); 
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6); 
 }
 body.dark-mode footer { 
-  background: #001a4d; 
-  border-top: 5px dashed #0055ff; 
+  background: rgba(15, 20, 25, 0.6); 
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #88c0d0;
 }
