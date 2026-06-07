@@ -127,3 +127,40 @@ function handleScrollReveal() {
     });
 }
 window.addEventListener('scroll', handleScrollReveal);
+
+// ==========================================================================
+// 4. LOGIC NÚT BỎ QUA GAME (SKIP BUTTON)
+// ==========================================================================
+const skipBtn = document.getElementById('skip-btn');
+
+if (skipBtn) {
+    skipBtn.addEventListener('click', function(e) {
+        // Ngăn chặn sự kiện click truyền xuống phía dưới (tránh lỗi context menu)
+        e.stopPropagation();
+
+        // 1. Ẩn màn hình XP hiện tại
+        if (xpScreen) {
+            xpScreen.style.opacity = '0';
+            xpScreen.style.visibility = 'hidden';
+        }
+        
+        // 2. Đảm bảo màn hình chúc mừng màu đen (congrats-screen) không hiện ra
+        if (congratsScreen) {
+            congratsScreen.style.display = 'none';
+        }
+
+        // 3. Hiện thẳng màn hình Portfolio chính
+        if (portfolioScreen) {
+            portfolioScreen.style.visibility = 'visible';
+            portfolioScreen.style.opacity = '1';
+            
+            // Mở khóa thanh cuộn dọc cho trình duyệt
+            document.body.style.overflow = 'auto'; 
+            
+            // Kích hoạt ngay hiệu ứng trượt cuộn các Project đầu tiên
+            if (typeof handleScrollReveal === 'function') {
+                handleScrollReveal();
+            }
+        }
+    });
+}
