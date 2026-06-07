@@ -279,13 +279,6 @@ body.dark-mode {
   height: 100%;
 }
 
-header {
-  background: linear-gradient(135deg, #ff99cc, #ff66b2);
-  color: white;
-  padding: 40px 20px;
-  text-align: center;
-  border-bottom: 5px dashed #fff;
-}
 body.dark-mode header { background: linear-gradient(135deg, #b30059, #660033); }
 
 nav {
