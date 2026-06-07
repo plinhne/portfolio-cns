@@ -428,3 +428,51 @@ body.dark-mode footer { background: #660033; }
   visibility: visible;
   opacity: 1;
 }
+
+/* ==========================================================================
+   8. HEADER CÔNG NGHỆ (INTERACTIVE BACKGROUND)
+   ========================================================================== */
+#tech-header {
+  position: relative;
+  width: 100%;
+  height: 400px; /* Bạn có thể tăng/giảm độ cao của phần nền này */
+  background-color: #050505; /* Nền đen đậm */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #00ff00; /* Viền xanh lá */
+}
+
+#tech-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Nằm dưới chữ */
+}
+
+.header-content {
+  position: relative;
+  z-index: 2; /* Nổi lên trên nền canvas */
+  text-align: center;
+  color: #00ff00; /* Chữ màu xanh công nghệ */
+  pointer-events: none; /* Tránh việc chữ chặn tương tác chuột với canvas */
+}
+
+.header-content h1 {
+  font-size: 3.5em;
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  margin-bottom: 10px;
+}
+
+.header-content p {
+  color: #e0e0e0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.2em;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
